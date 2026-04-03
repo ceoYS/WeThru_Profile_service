@@ -3,7 +3,8 @@
     "allow": [
       "Bash(cd:*)",
       "Bash(git:*)",
-      "Bash(cmd /c \"cd /d C:\\\\Users\\\\HDEC\\\\Desktop\\\\my\\\\wethru_profile && git status\")"
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\HDEC\\\\Desktop\\\\my\\\\wethru_profile && git status\")",
+      "Bash(cmd:*)"
     ]
   }
 }

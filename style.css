@@ -604,9 +604,10 @@ button:focus-visible {
 .mockup-laptop__screen {
   width: 100%;
   aspect-ratio: 16 / 10;
+  min-height: 450px;
   background: #0A0A0A;
   border-radius: 4px 4px 0 0;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
 }
 
@@ -827,13 +828,11 @@ button:focus-visible {
 .mockup-mobile__screen {
   width: 100%;
   aspect-ratio: 9 / 16;
+  min-height: 500px;
   background: #0A0A0A;
   border-radius: 8px;
-  overflow: hidden;
-  padding: 12px 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  overflow: auto;
+  display: block;
 }
 
 .mockup-mobile__line {
@@ -1034,7 +1033,9 @@ button:focus-visible {
   background: #080808;
   border: 1px solid rgba(201, 168, 76, 0.2);
   padding: 0;
-  overflow: hidden;
+  overflow: auto;
+  aspect-ratio: auto;
+  height: 420px;
 }
 
 .problem__profile-preview {
@@ -3014,7 +3015,7 @@ button:focus-visible {
   }
 
   .mockup-mobile__screen {
-    padding: 8px 5px;
+    padding: 0;
   }
 
   .hero__bg::before {
@@ -3201,7 +3202,7 @@ button:focus-visible {
   height: 100%;
   border: none;
   display: block;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* Showcase browser mockup iframes */
@@ -3218,7 +3219,7 @@ button:focus-visible {
   height: 100%;
   border: none;
   display: block;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* Business card in problem section */
