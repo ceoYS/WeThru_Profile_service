@@ -825,11 +825,21 @@ button:focus-visible {
 }
 
 .mockup-mobile__screen {
+  position: relative;
   width: 100%;
   background: #0A0A0A;
   border-radius: 8px;
   overflow: hidden;
-  display: block;
+}
+
+.mockup-mobile__screen iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 375px;
+  height: 812px;
+  border: none;
+  transform-origin: top left;
 }
 
 .mockup-mobile__line {
