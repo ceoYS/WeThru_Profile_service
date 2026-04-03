@@ -604,10 +604,9 @@ button:focus-visible {
 .mockup-laptop__screen {
   width: 100%;
   aspect-ratio: 16 / 10;
-  min-height: 450px;
   background: #0A0A0A;
   border-radius: 4px 4px 0 0;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
 }
 
@@ -827,11 +826,9 @@ button:focus-visible {
 
 .mockup-mobile__screen {
   width: 100%;
-  aspect-ratio: 9 / 16;
-  min-height: 500px;
   background: #0A0A0A;
   border-radius: 8px;
-  overflow: auto;
+  overflow: hidden;
   display: block;
 }
 
@@ -1003,6 +1000,8 @@ button:focus-visible {
   justify-content: center;
   align-items: flex-start;
   gap: 0;
+  aspect-ratio: auto;
+  height: 350px;
 }
 
 .problem__card-lines {
@@ -1033,9 +1032,23 @@ button:focus-visible {
   background: #080808;
   border: 1px solid rgba(201, 168, 76, 0.2);
   padding: 0;
-  overflow: auto;
+  overflow: hidden;
   aspect-ratio: auto;
-  height: 420px;
+  height: 350px;
+}
+
+.problem__profile-iframe-wrap {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+}
+
+.problem__profile-iframe-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 .problem__profile-preview {
@@ -1357,8 +1370,9 @@ button:focus-visible {
 .showcase__screen {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  overflow: auto;
+  height: 500px;
+  overflow: visible;
+  border-radius: 8px;
 }
 
 .showcase__slide {
@@ -1369,7 +1383,7 @@ button:focus-visible {
   transition: opacity 0.4s ease;
   display: flex;
   flex-direction: column;
-  padding: 32px 28px;
+  padding: 0;
 }
 
 .showcase__slide.is-active {
@@ -2106,6 +2120,16 @@ button:focus-visible {
   color: var(--color-text-secondary);
 }
 
+.pricing__feature--highlight {
+  color: var(--color-gold);
+  font-weight: 500;
+  font-size: 13px;
+  padding: 6px 10px;
+  background: rgba(201, 168, 76, 0.06);
+  border: 1px solid rgba(201, 168, 76, 0.2);
+  border-radius: 6px;
+}
+
 .pricing__feature-icon {
   flex-shrink: 0;
   width: 18px;
@@ -2171,9 +2195,21 @@ button:focus-visible {
   margin-bottom: 80px;
 }
 
+.process__label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: 16px;
+}
+
 .process__headline {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.2;
   color: var(--color-text-primary);
   margin-bottom: 16px;
@@ -2183,6 +2219,27 @@ button:focus-visible {
   font-size: 17px;
   font-weight: 400;
   color: var(--color-text-muted);
+}
+
+.process__step-time {
+  display: block;
+  font-size: 13px;
+  color: var(--color-text-muted);
+  opacity: 0.5;
+  margin-top: 8px;
+}
+
+.process__step-pro-badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 3px 10px;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  background: rgba(201, 168, 76, 0.06);
 }
 
 .process__timeline {
@@ -3194,31 +3251,13 @@ button:focus-visible {
   }
 }
 
-/* ====== iframe embeds (Round 3) ====== */
+/* ====== iframe embeds ====== */
 
-/* Hero laptop mockup iframe */
-.mockup-iframe {
+.showcase__slide iframe {
+  display: block;
   width: 100%;
   height: 100%;
   border: none;
-  display: block;
-  pointer-events: auto;
-}
-
-/* Showcase browser mockup iframes */
-.showcase__iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
-
-/* Problem section — profile preview iframe */
-.problem__profile-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
   pointer-events: auto;
 }
 
