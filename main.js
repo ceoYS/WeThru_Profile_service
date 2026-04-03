@@ -228,17 +228,6 @@
         if (tagGroups[idx]) tagGroups[idx].classList.add('is-active');
         if (urlEl) urlEl.textContent = urls[idx];
 
-        setTimeout(() => {
-          const activeSlide = document.querySelector('.showcase__slide.is-active');
-          if (activeSlide) {
-            const iframe = activeSlide.querySelector('iframe');
-            if (iframe) {
-              const src = iframe.src;
-              iframe.src = '';
-              iframe.src = src;
-            }
-          }
-        }, 100);
       });
     });
   }

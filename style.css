@@ -567,6 +567,9 @@ button:focus-visible {
 
 .mockup-wrapper {
   position: relative;
+  display: flex;
+  gap: 40px;
+  align-items: flex-end;
   transform: rotateY(-8deg) rotateX(4deg);
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -577,6 +580,7 @@ button:focus-visible {
 
 /* Laptop Mockup */
 .mockup-laptop {
+  flex: 3;
   width: 680px;
   max-width: 900px;
   background: #1A1A1A;
@@ -807,10 +811,9 @@ button:focus-visible {
 
 /* Mobile Mockup */
 .mockup-mobile {
-  position: absolute;
-  right: -40px;
-  bottom: -30px;
-  width: 200px;
+  position: relative;
+  flex: 1;
+  max-width: 200px;
   aspect-ratio: 9 / 19.5;
   min-height: 580px;
   background: #1A1A1A;
