@@ -3672,7 +3672,7 @@ button:focus-visible {
     position: relative;
     overflow: hidden;
     height: 0;
-    padding-bottom: 66.67%;
+    padding-bottom: 56%;
     background: #111;
   }
 
@@ -3683,7 +3683,7 @@ button:focus-visible {
     width: 1200px;
     height: 800px;
     transform-origin: top left;
-    transform: scale(0.3);
+    transform: scale(0.28);
   }
 
   .showcase__slide iframe {
@@ -3754,12 +3754,36 @@ button:focus-visible {
   }
 
   /* ===== Testimonials ===== */
+  .testimonials {
+    overflow: hidden;
+  }
+
+  .testimonials__slider {
+    overflow: hidden;
+  }
+
   .testimonials__headline {
     font-size: 28px;
   }
 
+  .testimonials__card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    padding: 24px 20px;
+  }
+
+  .testimonials__card blockquote,
+  .testimonials__card p {
+    font-size: 14px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
   .testimonial__before {
     font-size: 12px;
+    word-break: keep-all;
   }
 
   /* ===== CTA ===== */
