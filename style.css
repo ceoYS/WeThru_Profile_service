@@ -2402,6 +2402,11 @@ button:focus-visible {
   overflow: hidden;
 }
 
+.testimonials__slider {
+  overflow: hidden;
+  width: 100%;
+}
+
 .testimonials__header {
   text-align: center;
   margin-bottom: 64px;
@@ -2421,6 +2426,7 @@ button:focus-visible {
 
 .testimonials__track {
   display: flex;
+  width: 100%;
   gap: 24px;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2430,8 +2436,10 @@ button:focus-visible {
   background: #171717;
   border: 1px solid var(--color-border-dark);
   border-radius: 16px;
-  padding: 40px 32px;
+  padding: 32px;
   flex-shrink: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .testimonials__stars {
@@ -2469,6 +2477,9 @@ button:focus-visible {
   color: var(--color-text-body);
   line-height: 1.7;
   margin-bottom: 28px;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .testimonials__author {
