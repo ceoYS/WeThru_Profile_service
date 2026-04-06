@@ -112,7 +112,7 @@
         }
         .hero-scroll-hint .line { width: 40px; height: 1px; background: var(--gold); }
 
-        /* === CSS 실루엣 아바타 === */
+        /* === 아바타 === */
         .avatar-wrapper { flex-shrink: 0; width: 380px; height: 380px; position: relative; }
         .avatar-circle {
             width: 100%; height: 100%; border-radius: 50%;
@@ -126,36 +126,10 @@
             animation: avatarRotate 20s linear infinite;
         }
         @keyframes avatarRotate { to { transform: rotate(360deg); } }
-        .silhouette { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 320px; }
-        .silhouette-head {
-            width: 80px; height: 88px;
-            background: radial-gradient(ellipse, #2A2A2A 0%, #1F1F1F 60%, #181818 100%);
-            border-radius: 50% 50% 48% 48%; margin: 0 auto 2px; position: relative;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-        }
-        .silhouette-neck { width: 32px; height: 20px; background: linear-gradient(180deg, #252525, #1E1E1E); margin: 0 auto; border-radius: 2px; }
-        .silhouette-body {
-            width: 180px; height: 210px;
-            background: linear-gradient(180deg, #222222 0%, #1A1A1A 40%, #151515 100%);
-            margin: 0 auto; border-radius: 80px 80px 0 0; position: relative;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
-        }
-        .silhouette-body::before {
-            content: ''; position: absolute; top: 0; left: 10%; right: 10%;
-            height: 1px; background: linear-gradient(90deg, transparent, rgba(201,168,76,0.15), transparent);
-        }
         .avatar-photo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            border-radius: 50%;
-            z-index: 2;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center; border-radius: 50%; z-index: 2;
         }
-
         .avatar-label {
             position: absolute; bottom: -36px; left: 50%; transform: translateX(-50%);
             font-family: var(--serif); font-style: italic; font-size: 0.8rem;
@@ -205,8 +179,6 @@
 
         /* ===== EXPERIENCE ===== */
         .experience { background: var(--bg-primary); }
-
-        /* 카테고리 탭 */
         .exp-category-tabs {
             display: flex; gap: 12px; margin-bottom: 50px; flex-wrap: wrap;
         }
@@ -219,16 +191,13 @@
         .exp-tab:hover, .exp-tab.active {
             background: var(--gold); color: var(--bg-primary); border-color: var(--gold);
         }
-
         .exp-group { display: none; }
         .exp-group.active { display: block; }
-
         .exp-group-title {
             font-family: var(--serif); font-style: italic; font-size: 1.1rem;
             color: var(--gold); margin-bottom: 32px; padding-bottom: 12px;
             border-bottom: 1px solid rgba(201,168,76,0.15);
         }
-
         .timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 40px; }
         .timeline::before {
             content: ''; position: absolute; left: 0; top: 0; bottom: 0;
@@ -244,7 +213,6 @@
             content: ''; position: absolute; left: -36px; top: 10px;
             width: 4px; height: 4px; background: var(--gold); border-radius: 50%; z-index: 3;
         }
-        /* 현재 재직 중 강조 */
         .timeline-item.current::before {
             border-color: var(--gold); background: var(--gold);
             box-shadow: 0 0 12px rgba(201,168,76,0.4);
@@ -422,10 +390,6 @@
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .avatar-wrapper { width: 300px; height: 300px; }
-            .silhouette { width: 160px; height: 260px; }
-            .silhouette-head { width: 66px; height: 72px; }
-            .silhouette-neck { width: 26px; height: 16px; }
-            .silhouette-body { width: 150px; height: 172px; }
             .strength-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 768px) {
@@ -435,10 +399,6 @@
             .hero-desc { margin: 0 auto; }
             .hero-scroll-hint { justify-content: center; }
             .avatar-wrapper { width: 220px; height: 220px; }
-            .silhouette { width: 120px; height: 190px; }
-            .silhouette-head { width: 50px; height: 55px; }
-            .silhouette-neck { width: 20px; height: 12px; }
-            .silhouette-body { width: 115px; height: 123px; }
             .strength-grid { grid-template-columns: 1fr; }
             .product-grid { grid-template-columns: 1fr; }
             .business-hero { padding: 36px 24px; }
@@ -481,11 +441,11 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <span class="hero-label">Strategic Planner</span>
-                    <h1 class="hero-name">전략기획가</h1>
+                    <h1 class="hero-name">전략 기획자</h1>
                     <p class="hero-sub">Strategic Planner · Business Developer · Founder</p>
                     <p class="hero-desc">
-                        조직의 목표를 위해 자발적으로 학습하며, 지속 성장 가능한 전략가.
-                        현장에서 직접 부딪히며 '되는 사업'을 만들기 위해 노력합니다.
+                        현장 인터뷰 300회, 정부지원금 1.2억 확보, H그룹 AI 전략기획까지.<br>
+                        사업의 청사진을 직접 검증하고 실행해온 전략가입니다.
                     </p>
                     <div class="hero-scroll-hint">
                         <span class="line"></span>
@@ -495,10 +455,11 @@
                 <div class="avatar-wrapper">
                     <div class="avatar-circle">
                         <img
-src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Professional_business_profile_photo_of_Korean_male-1775390787315%20(1).png" alt="Profile Photo" class="avatar-photo">
-                        </div>
+                            src="https://github.com/ceoYS/Profile_Photo/blob/main/my%20picture2.png?raw=true"
+                            alt="선윤성 Profile Photo"
+                            class="avatar-photo">
                     </div>
-                    <span class="avatar-label">Portfolio Sample</span>
+                    <span class="avatar-label">Portfolio</span>
                 </div>
             </div>
         </div>
@@ -509,34 +470,34 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
         <div class="container">
             <div class="reveal">
                 <span class="section-label">About</span>
-                <h2 class="section-title">성장의 '불편함'을 즐기는 항해사</h2>
+                <h2 class="section-title">사업의 '되는 구조'를 설계합니다</h2>
                 <div class="section-divider"></div>
                 <p class="section-desc">
-                    조직의 목표를 위해 자발적으로 학습하며 지속 성장 가능한 전략가.
-                    팀원의 말이 내가 이해한 것과 같은지 항상 확인하며 경청하고,
-                    부족한 능력을 채우기 위한 별도의 노력을 멈추지 않습니다.
+                    전략은 실행되지 않으면 의미가 없습니다.
+                    기획에서 멈추지 않고 직접 현장에서 부딪히며,
+                    숫자로 검증된 결과를 만들어왔습니다.
                 </p>
             </div>
             <div class="strength-grid reveal">
                 <div class="strength-card">
                     <span class="card-num">01</span>
                     <h3>의사소통</h3>
-                    <p>팀원의 말이 내가 이해한 것과 같은지 항상 확인하며 경청하는 사람</p>
+                    <p>팀원이 말한 내용이 내가 이해한 내용과 같은지 항상 확인하며, 경청하고 명확하게 전달합니다</p>
                 </div>
                 <div class="strength-card">
                     <span class="card-num">02</span>
                     <h3>문제 발굴</h3>
-                    <p>현장에서 직접 300회 이상의 인터뷰로 문제를 정의하고 가설을 검증</p>
+                    <p>현장 인터뷰 300회 이상의 경험으로 진짜 문제를 찾아냅니다</p>
                 </div>
                 <div class="strength-card">
                     <span class="card-num">03</span>
-                    <h3>끈기</h3>
-                    <p>모든 프로세스에 오너십을 갖고 맡은 바를 끝까지 책임지는 자세</p>
+                    <h3>실행력</h3>
+                    <p>기획에서 멈추지 않고, 300회 인터뷰·1.2억 확보·특허 출원까지 직접 실행한 사람</p>
                 </div>
                 <div class="strength-card">
                     <span class="card-num">04</span>
-                    <h3>성장 의지</h3>
-                    <p>부족한 역량을 채우기 위한 별도의 노력을 지속하며 스스로 학습</p>
+                    <h3>검증 기반 의사결정</h3>
+                    <p>빠른 가설 설정, 빠른 검증, 빠른 피봇. 감이 아닌 데이터로 판단합니다</p>
                 </div>
             </div>
         </div>
@@ -547,145 +508,101 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
         <div class="container">
             <div class="reveal">
                 <span class="section-label">Experience</span>
-                <h2 class="section-title">커리어 타임라인</h2>
+                <h2 class="section-title">경험의 궤적</h2>
                 <div class="section-divider"></div>
             </div>
 
-            <!-- 카테고리 탭 -->
             <div class="exp-category-tabs reveal">
                 <button class="exp-tab active" data-target="exp-all">All</button>
                 <button class="exp-tab" data-target="exp-career">정규 경력</button>
-                <button class="exp-tab" data-target="exp-founder">창업 / 대표</button>
-                <button class="exp-tab" data-target="exp-intern">인턴</button>
-                <button class="exp-tab" data-target="exp-project">프로젝트 / 학회</button>
+                <button class="exp-tab" data-target="exp-founder">창업 / 사업</button>
+                <button class="exp-tab" data-target="exp-intern">인턴십</button>
+                <button class="exp-tab" data-target="exp-project">프로젝트 / 활동</button>
             </div>
 
             <!-- ===== ALL ===== -->
             <div class="exp-group active" id="exp-all">
                 <div class="timeline reveal">
 
-                    <!-- 2025 현재 -->
+                    <!-- H그룹 전략기획 -->
                     <div class="timeline-item current">
                         <div class="timeline-content">
                             <span class="timeline-date">2025.01 — Present</span>
-                            <h3 class="timeline-role">H그룹 대기업 · 전략기획사업부 전사 AI 혁신</h3>
-                            <span class="timeline-org">대기업 전략기획 부문</span>
+                            <h3 class="timeline-role">H그룹 전략기획사업부</h3>
+                            <span class="timeline-org">H그룹</span>
                             <p class="timeline-desc">
-                                전사 AI 혁신 부서에서 전략기획 업무를 수행. 조직 전반의 AI 전환 전략을 수립하고, 부서 간 협업을 통해 혁신 프로젝트를 리드하고 있습니다.
+                                그룹사 현장 운영에서 원가 구조와 비용 효율화를 체득한 뒤, 전략기획사업부로 이동하여 AI 도입 전략 수립, 신규 사업 기회 발굴 및 경영진 보고를 담당하고 있습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag badge-current">재직 중</span>
-                                <span class="timeline-tag">전사 AI 혁신</span>
+                                <span class="timeline-tag badge-current">현재 진행</span>
                                 <span class="timeline-tag">전략기획</span>
+                                <span class="timeline-tag">AI 도입 전략</span>
+                                <span class="timeline-tag">원가 구조</span>
                             </div>
                         </div>
                     </div>
 
+                    <!-- WeThru -->
                     <div class="timeline-item current">
                         <div class="timeline-content">
                             <span class="timeline-date">2025.01 — Present</span>
-                            <h3 class="timeline-role">바이럴 마케팅 대행사 · Founder</h3>
-                            <span class="timeline-org">브릿지마케팅</span>
-                            <p class="timeline-desc">
-                                바이럴 마케팅 대행사를 창업하여 운영. 클라이언트의 브랜드 인지도 향상과 디지털 마케팅 전략 수립·실행을 담당하고 있습니다.
-                            </p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag badge-current">운영 중</span>
-                                <span class="timeline-tag">바이럴 마케팅</span>
-                                <span class="timeline-tag">Founder</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item current">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2025.01 — Present</span>
-                            <h3 class="timeline-role">전략 컨설팅 · CEO</h3>
+                            <h3 class="timeline-role">전략 컨설팅 스타트업 CEO</h3>
                             <span class="timeline-org">WeThru</span>
                             <p class="timeline-desc">
-                                전략 컨설팅 업체 WeThru를 설립하여 대표로서 스타트업·중소기업 대상 전략 컨설팅, 사업계획서·IR 작성, 시장 진입 전략 수립 등을 제공하고 있습니다.
+                                전략 컨설팅 스타트업 WeThru를 창업하여 사업 전략 수립, IR 자료 작성, 바이럴 마케팅 대행까지 초기 창업자를 위한 종합 솔루션을 운영하고 있습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag badge-current">운영 중</span>
+                                <span class="timeline-tag badge-current">현재 진행</span>
                                 <span class="timeline-tag">전략 컨설팅</span>
                                 <span class="timeline-tag">CEO</span>
+                                <span class="timeline-tag">마케팅 대행</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2024 -->
+                    <!-- PwC RA -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2024.09 — 2024.11</span>
-                            <h3 class="timeline-role">글로벌 컨설팅펌 RA</h3>
-                            <span class="timeline-org">Big4 글로벌 컨설팅</span>
+                            <h3 class="timeline-role">PricewaterhouseCoopers RA</h3>
+                            <span class="timeline-org">PwC</span>
                             <p class="timeline-desc">
-                                대형 고객사 ERP 솔루션 개편에 따른 CRM 데이터 마이그레이션 작업에 참여. 구 시스템 데이터를 신규 시스템으로 이관하며, 데이터 누락·버그 리포팅 및 고객사 개발자와 디버깅 협업을 수행했습니다.
+                                삼성물산 ERP 솔루션 개편에 따른 CRM 데이터 이관 작업에 참여했습니다. 구 ERP 시스템의 데이터를 신규 시스템으로 마이그레이션하고, 데이터 현황 보고 및 신규 ERP 디버깅 작업을 수행했습니다. 버그 4건을 발견하여 보고했습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">데이터 마이그레이션</span>
-                                <span class="timeline-tag">CRM 이관</span>
-                                <span class="timeline-tag">ERP 디버깅</span>
+                                <span class="timeline-tag">PwC</span>
+                                <span class="timeline-tag">ERP 마이그레이션</span>
+                                <span class="timeline-tag">CRM 데이터</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2023.12 - 2024.05 -->
+                    <!-- zolv 사르르 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.12 — 2024.05</span>
-                            <h3 class="timeline-role">친환경 포장재 스타트업 · 공동창업</h3>
-                            <span class="timeline-org">대표</span>
+                            <h3 class="timeline-role">친환경 과일 포장재 'zolv(사르르)' 공동창업</h3>
+                            <span class="timeline-org">대표 · 기여도 100%</span>
                             <p class="timeline-desc">
-                                물에 녹아 잔류농약 제거가 가능한 과일 포장재를 개발. 300회 이상 고객 인터뷰, 특허 출원, 정부지원사업 1.2억 확보, OEM·원재료 공급처 확보까지 달성했습니다.
+                                물에 녹아 잔류농약 제거가 가능한 과일 포장재를 직접 기획하고 사업화했습니다. 과수농가·일반소비자·농협 대상 300회 이상 현장 인터뷰로 수요를 검증하고, 3D 프린팅 시제품 제작, 특허 출원, 정부지원금 1.2억 확보, OEM·원재료 공급 확약, 전국 중앙농협 16곳 및 단위농협 321곳에 유통 영업을 진행했습니다.
                             </p>
                             <div class="timeline-tags">
                                 <span class="timeline-tag">1.2억 확보</span>
                                 <span class="timeline-tag">특허 출원</span>
                                 <span class="timeline-tag">300+ 인터뷰</span>
+                                <span class="timeline-tag">농협 337곳 영업</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2023.06 ~ 프로덕트 -->
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.06 — Present</span>
-                            <h3 class="timeline-role">AI 헬스 솔루션 기획자</h3>
-                            <span class="timeline-org">GymPT · 프로덕트 기획</span>
-                            <p class="timeline-desc">
-                                웨이트 트레이닝 자세 진단 솔루션을 기획. LLM 활용 파인튜닝 및 RAG 기획, 82명 사용 인터뷰, 헬스장 계약 체결까지 달성했습니다.
-                            </p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag">LLM/RAG</span>
-                                <span class="timeline-tag">서비스 기획</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.06 — Present</span>
-                            <h3 class="timeline-role">인터뷰 매칭 플랫폼 기획자</h3>
-                            <span class="timeline-org">inuin · 서비스 기획 / 퍼블리셔</span>
-                            <p class="timeline-desc">
-                                정성적 인터뷰 참여자 연결 솔루션 플랫폼. 개발자 11명과 협업하며 서비스 기획자 겸 퍼블리셔로 참여. VoC 검증 완료 후 한 달 이상 지속 매출을 창출했습니다.
-                            </p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag">개발자 11명 협업</span>
-                                <span class="timeline-tag">지속 매출</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2023.06 - 08 -->
+                    <!-- 볼트앤너트 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.06 — 2023.08</span>
-                            <h3 class="timeline-role">B2B 하드웨어 스타트업 · 영업 인턴</h3>
-                            <span class="timeline-org">행사 기획 총괄</span>
+                            <h3 class="timeline-role">B2B·B2G 영업 인턴 — 행사기획·총괄</h3>
+                            <span class="timeline-org">(주)볼트앤너트</span>
                             <p class="timeline-desc">
-                                1,400여 곳에 콜드메일 및 유선 영업 진행. 행사 수주 후 기획·총괄을 담당하며, 강연자 초청부터 케이터링까지 외부 커뮤니케이션을 총괄했습니다. 만족도 5점 만점 기준 4.87점을 기록했습니다.
+                                1,400여 곳에 콜드메일 및 유선 영업 후 대면 미팅을 진행했습니다. 행사 수주 후 기획·외부 의사소통·강연자 초청·성과보고서 작성까지 총괄했습니다. 한국뉴욕주립대학교 행사를 성공적으로 수주하여, 만족도 조사 5점 만점 기준 평균 4.87점을 기록했습니다.
                             </p>
                             <div class="timeline-tags">
                                 <span class="timeline-tag">1,400곳 영업</span>
@@ -695,148 +612,100 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                         </div>
                     </div>
 
-                    <!-- 2023.06 - 11 -->
+                    <!-- LittlePeople -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.06 — 2023.11</span>
-                            <h3 class="timeline-role">인턴 채용 솔루션 · 프로젝트 리더</h3>
-                            <span class="timeline-org">LittlePeople · 프로젝트 리딩</span>
+                            <h3 class="timeline-role">중소기업 인턴채용 솔루션 'LittlePeople' 프로젝트 리딩</h3>
+                            <span class="timeline-org">프로젝트 리더 · 기여도 100%</span>
                             <p class="timeline-desc">
-                                중소기업 인턴 채용 솔루션 플랫폼을 기획. 아이디어 발굴·수요 검증 인터뷰를 진행하여 대학생 21명의 인턴 연계를 완료. 빠른 가설 검증 후 시장성 부족을 판단하고 피봇한 경험입니다.
+                                중소기업과 대학생을 연결하는 인턴 채용 플랫폼을 기획하고 운영했습니다. 중앙대 현장실습센터와 연계해 21명 인턴 연계를 완료했습니다. 수요 검증 결과 시장성이 부족하다고 판단하여 전략적 피봇을 결정했습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">21명 인턴 연계</span>
-                                <span class="timeline-tag">가설 검증</span>
+                                <span class="timeline-tag">21명 연계</span>
+                                <span class="timeline-tag">플랫폼 기획</span>
+                                <span class="timeline-tag">수요 검증</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2023.03 - 24.02 재무학회 -->
+                    <!-- 재무학회 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.03 — 2024.02</span>
-                            <h3 class="timeline-role">재무학회 · 리서치 / 펀드매니저</h3>
-                            <span class="timeline-org">대학교 재무연구회 41기</span>
+                            <h3 class="timeline-role">재무학회 재무연구회 41기 리서치·펀드매니저</h3>
+                            <span class="timeline-org">중앙대학교 재무연구회</span>
                             <p class="timeline-desc">
-                                저평가된 가치주를 발굴·검증하는 리서치를 수행. 거시경제 분석부터 매출·비용·기업가치 추정까지 진행. 리서치 챌린지 대회 우수상을 수상했습니다.
+                                저평가된 가치주를 발굴·검증하는 리서치를 수행했습니다. 거시경제 분석, 매출·비용 추정, 기업가치 추정까지 전 과정을 경험했습니다. KATCH 리서치 챌린지 대회 우수상, CAU FRI CHALLENGE 우수상을 수상했습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">기업 분석</span>
-                                <span class="timeline-tag">리서치 우수상</span>
+                                <span class="timeline-tag">재무 분석</span>
+                                <span class="timeline-tag">펀드매니저</span>
+                                <span class="timeline-tag">수상 2건</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2023.03 ESG -->
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.03 —</span>
-                            <h3 class="timeline-role">ESG 전문 경영대학원 강좌 수료</h3>
-                            <p class="timeline-desc">ESG 전문 경영 과정을 수강하며 지속가능 경영에 대한 전문 지식을 습득했습니다.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">ESG</span></div>
-                        </div>
-                    </div>
-
-                    <!-- 2023.03 금융연수 -->
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.03</span>
-                            <h3 class="timeline-role">금융 연수 프로그램 3기 수료</h3>
-                            <p class="timeline-desc">금융 업계 실무 역량을 강화하기 위해 대기업 금융사 연수 프로그램을 수료했습니다.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">금융 연수</span></div>
-                        </div>
-                    </div>
-
-                    <!-- 2023.02 - 04 소개팅 앱 -->
+                    <!-- 텐덤 연픽 PM -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.02 — 2023.04</span>
-                            <h3 class="timeline-role">소개팅 앱 주니어 PM · 서비스 기획</h3>
-                            <span class="timeline-org">서비스 기획 인턴</span>
+                            <h3 class="timeline-role">소개팅앱 서비스기획 인턴 (주니어 PM)</h3>
+                            <span class="timeline-org">(주)연픽 — 텐덤</span>
                             <p class="timeline-desc">
-                                소개팅 앱 UX 개선 프로젝트에 참여. GA를 통한 Pain Point 발견, 이벤트 트래킹 및 UI/UX 리서치 수행. 고객 체류시간 32% 향상, 이탈률 42% 감소, 전환율 28% 향상에 기여했습니다. 오프라인 포스터 마케팅으로 팔로워 600→1200, CAC 25원을 기록했습니다.
+                                소개팅앱 UX 개선을 주도했습니다. GA를 통한 Pain Point 발견, 이벤트 트래킹, 사용자 UI/UX 리서치를 기반으로 관상 기반 맞춤 추천 알고리즘 기본 구성을 기획했습니다. 고객 평균 DT 32%↑, 이탈률 42%↓, Conversion Rate 28%↑ 달성. 인스타그램 팔로워 600→1,200명, CAC 25원 기록.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">전환율 28%↑</span>
                                 <span class="timeline-tag">이탈률 42%↓</span>
+                                <span class="timeline-tag">전환율 28%↑</span>
                                 <span class="timeline-tag">CAC 25원</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2023.02 - 04 디스코드 -->
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.02 — 2023.04</span>
-                            <h3 class="timeline-role">커뮤니티 마케터</h3>
-                            <span class="timeline-org">디스코드 커뮤니티 기획·운영</span>
-                            <p class="timeline-desc">
-                                면접 준비생 커뮤니티를 디스코드 채널로 기획·운영. 소개 웹사이트를 제작하여 이벤트 기간 내 가입자 수 70명, 구매 전환율 42%를 기록했습니다.
-                            </p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag">커뮤니티 운영</span>
-                                <span class="timeline-tag">전환율 42%</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2022.12 - 2023.02 전략기획 -->
+                    <!-- 애스크미 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2022.12 — 2023.02</span>
                             <h3 class="timeline-role">전략기획 인턴</h3>
-                            <span class="timeline-org">고객사 5개 담당</span>
+                            <span class="timeline-org">(주)애스크미</span>
                             <p class="timeline-desc">
-                                중소기업·예비창업자 대상 사업 컨설팅 수행. 사업계획서·IR 작성, 시장조사 보고서 제작, 사업 방향성 제안 및 미팅, 사후 CS 관리까지 컨설팅 전 과정을 경험했습니다.
+                                고객사 5개를 담당하며 사업 컨설팅, 사업계획서·IR 작성, 고객사 미팅 및 CS 관리를 수행했습니다. 시장조사 보고서 제작부터 사업 방향성 제안, 사후 CS 관리까지 전략기획 전반을 경험했습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">사업계획서</span>
+                                <span class="timeline-tag">전략기획</span>
                                 <span class="timeline-tag">IR 작성</span>
                                 <span class="timeline-tag">고객사 5개</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 2022.09 - 2023.02 학회 -->
+                    <!-- SoME -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2022.09 — 2023.02</span>
-                            <h3 class="timeline-role">경영컨설팅 학회 PM · 스타트업 협업</h3>
-                            <span class="timeline-org">SoME 학회 / 스타트업 부문</span>
+                            <h3 class="timeline-role">대학연합 경영컨설팅 학회 PM</h3>
+                            <span class="timeline-org">SoME 스타트업 부문</span>
                             <p class="timeline-desc">
-                                소상공인 실행 컨설팅 및 스타트업 협업 리딩을 수행. 콜드메일 112개 기업 발송, 협업 4건 성사. 모교 꽃집 컨설팅을 통해 비수기·성수기 매출 차이 100만 원 이상 감소에 기여했습니다.
+                                스타트업 협업 4개 팀을 총괄하며, 콜드메일 112개 기업 전송을 통해 협업을 성사시켰습니다. 중앙대 파머스플라워 소상공인 컨설팅을 수행하여 비수기·성수기 월별 매출 차이 100만원 이상 감소시켰습니다.
                             </p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">소상공인 컨설팅</span>
+                                <span class="timeline-tag">컨설팅</span>
                                 <span class="timeline-tag">협업 4건 성사</span>
+                                <span class="timeline-tag">매출 차이 100만원↓</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2022.09 — 2023.02</span>
-                            <h3 class="timeline-role">대학연합 스타트업 · 리더 파트 11기</h3>
-                            <span class="timeline-org">전국 대학연합 스타트업 조직</span>
-                            <p class="timeline-desc">
-                                전국 대학연합 스타트업 조직에서 리더 파트로 활동하며 팀 운영 및 프로젝트 관리를 경험했습니다.
-                            </p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag">리더십</span>
-                                <span class="timeline-tag">프로젝트 관리</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2023.09 - 12 서포터즈 -->
+                    <!-- 해커톤 -->
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.09 — 2023.12</span>
-                            <h3 class="timeline-role">청년 기업가정신 재단 · 대학생 서포터즈</h3>
+                            <h3 class="timeline-role">스타트업 해커톤 및 공모전 다수 참가</h3>
                             <p class="timeline-desc">
-                                한국 청년기업가정신재단 거점센터 연계 대학생 서포터즈로 활동하며 창업 생태계를 경험했습니다.
+                                다양한 해커톤과 공모전에 참가하며 사업 기획 역량을 검증하고, 15건 이상의 수상 실적을 기록했습니다.
                             </p>
-                            <div class="timeline-tags"><span class="timeline-tag">서포터즈</span></div>
+                            <div class="timeline-tags"><span class="timeline-tag">공모전 15+ 수상</span></div>
                         </div>
                     </div>
 
@@ -850,106 +719,89 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                     <div class="timeline-item current">
                         <div class="timeline-content">
                             <span class="timeline-date">2025.01 — Present</span>
-                            <h3 class="timeline-role">H그룹 대기업 · 전략기획사업부 전사 AI 혁신</h3>
-                            <span class="timeline-org">대기업 전략기획 부문</span>
-                            <p class="timeline-desc">전사 AI 혁신 부서에서 전략기획 업무를 수행. 조직 전반의 AI 전환 전략을 수립하고, 부서 간 협업을 통해 혁신 프로젝트를 리드하고 있습니다.</p>
+                            <h3 class="timeline-role">H그룹 전략기획사업부</h3>
+                            <span class="timeline-org">정규 경력</span>
+                            <p class="timeline-desc">그룹사 현장 운영에서 원가 구조와 비용 효율화를 체득한 뒤, 전략기획사업부로 이동하여 AI 도입 전략 수립, 신규 사업 기회 발굴 및 경영진 보고를 담당하고 있습니다.</p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag badge-current">재직 중</span>
-                                <span class="timeline-tag">전사 AI 혁신</span>
+                                <span class="timeline-tag badge-current">현재 진행</span>
+                                <span class="timeline-tag">전략기획</span>
+                                <span class="timeline-tag">AI 도입 전략</span>
                             </div>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2024.09 — 2024.11</span>
-                            <h3 class="timeline-role">글로벌 컨설팅펌 RA</h3>
-                            <span class="timeline-org">Big4 글로벌 컨설팅</span>
-                            <p class="timeline-desc">대형 고객사 ERP 솔루션 개편에 따른 CRM 데이터 마이그레이션, 버그 리포팅 및 고객사 개발자와 디버깅 협업 수행.</p>
+                            <h3 class="timeline-role">PricewaterhouseCoopers RA</h3>
+                            <span class="timeline-org">PwC</span>
+                            <p class="timeline-desc">삼성물산 ERP 솔루션 개편에 따른 CRM 데이터 이관 작업에 참여. 구 ERP → 신규 시스템 마이그레이션, 데이터 현황 보고, 신규 ERP 디버깅. 버그 4건 발견.</p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">데이터 마이그레이션</span>
-                                <span class="timeline-tag">CRM 이관</span>
+                                <span class="timeline-tag">PwC</span>
+                                <span class="timeline-tag">ERP 마이그레이션</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== 창업 / 대표 ===== -->
+            <!-- ===== 창업 / 사업 ===== -->
             <div class="exp-group" id="exp-founder">
-                <p class="exp-group-title">창업 / 대표</p>
+                <p class="exp-group-title">창업 / 사업</p>
                 <div class="timeline reveal">
                     <div class="timeline-item current">
                         <div class="timeline-content">
                             <span class="timeline-date">2025.01 — Present</span>
-                            <h3 class="timeline-role">바이럴 마케팅 대행사 · Founder</h3>
-                            <span class="timeline-org">브릿지마케팅</span>
-                            <p class="timeline-desc">바이럴 마케팅 대행사를 창업하여 운영. 클라이언트의 브랜드 인지도 향상과 디지털 마케팅 전략 수립·실행을 담당.</p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag badge-current">운영 중</span>
-                                <span class="timeline-tag">바이럴 마케팅</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item current">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2025.01 — Present</span>
-                            <h3 class="timeline-role">전략 컨설팅 · CEO</h3>
+                            <h3 class="timeline-role">전략 컨설팅 스타트업 CEO</h3>
                             <span class="timeline-org">WeThru</span>
-                            <p class="timeline-desc">전략 컨설팅 업체 WeThru를 설립하여 스타트업·중소기업 대상 전략 컨설팅, 사업계획서·IR 작성, 시장 진입 전략 수립을 제공.</p>
+                            <p class="timeline-desc">전략 컨설팅 스타트업 WeThru를 창업하여 사업 전략 수립, IR 자료 작성, 바이럴 마케팅 대행까지 초기 창업자를 위한 종합 솔루션을 운영하고 있습니다.</p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag badge-current">운영 중</span>
+                                <span class="timeline-tag badge-current">현재 진행</span>
                                 <span class="timeline-tag">전략 컨설팅</span>
+                                <span class="timeline-tag">마케팅 대행</span>
                             </div>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.12 — 2024.05</span>
-                            <h3 class="timeline-role">친환경 포장재 스타트업 · 공동창업 대표</h3>
-                            <p class="timeline-desc">물에 녹아 잔류농약 제거가 가능한 과일 포장재 개발. 1.2억 정부지원금 확보, 300+ 인터뷰, 특허 출원 완료, OEM·원재료 공급처 확보.</p>
+                            <h3 class="timeline-role">친환경 과일 포장재 'zolv(사르르)' 공동창업</h3>
+                            <span class="timeline-org">대표 · 기여도 100%</span>
+                            <p class="timeline-desc">물에 녹아 잔류농약 제거가 가능한 과일 포장재를 기획·사업화. 300+ 인터뷰, 1.2억 정부지원금 확보, 특허 출원, OEM·원재료 공급 확약, 농협 337곳 유통 영업.</p>
                             <div class="timeline-tags">
                                 <span class="timeline-tag">1.2억 확보</span>
                                 <span class="timeline-tag">특허 출원</span>
+                                <span class="timeline-tag">농협 337곳</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== 인턴 ===== -->
+            <!-- ===== 인턴십 ===== -->
             <div class="exp-group" id="exp-intern">
-                <p class="exp-group-title">인턴 경험</p>
+                <p class="exp-group-title">인턴십</p>
                 <div class="timeline reveal">
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.06 — 2023.08</span>
-                            <h3 class="timeline-role">B2B 하드웨어 스타트업 · 영업 인턴</h3>
-                            <p class="timeline-desc">1,400여 곳 콜드메일·유선 영업. 행사 수주 후 기획·총괄 담당. 만족도 4.87/5.0 기록.</p>
+                            <h3 class="timeline-role">B2B·B2G 영업 인턴 — 행사기획·총괄</h3>
+                            <span class="timeline-org">(주)볼트앤너트</span>
+                            <p class="timeline-desc">1,400여 곳 영업. 한국뉴욕주립대 행사 수주·총괄. 만족도 4.87/5.0점.</p>
                             <div class="timeline-tags">
                                 <span class="timeline-tag">1,400곳 영업</span>
-                                <span class="timeline-tag">행사 총괄</span>
+                                <span class="timeline-tag">만족도 4.87</span>
                             </div>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.02 — 2023.04</span>
-                            <h3 class="timeline-role">서비스 기획 인턴 · 주니어 PM</h3>
-                            <p class="timeline-desc">소개팅 앱 UX 개선, 전환율 28%↑, 이탈률 42%↓, 체류시간 32%↑. 오프라인 마케팅 CAC 25원 기록.</p>
+                            <h3 class="timeline-role">소개팅앱 서비스기획 인턴 (주니어 PM)</h3>
+                            <span class="timeline-org">(주)연픽 — 텐덤</span>
+                            <p class="timeline-desc">소개팅앱 UX 개선 주도. 이탈률 42%↓, 전환율 28%↑, DT 32%↑. 팔로워 600→1,200명, CAC 25원.</p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">전환율 28%↑</span>
+                                <span class="timeline-tag">이탈률 42%↓</span>
                                 <span class="timeline-tag">CAC 25원</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.02 — 2023.04</span>
-                            <h3 class="timeline-role">커뮤니티 마케터</h3>
-                            <p class="timeline-desc">디스코드 커뮤니티 기획·운영. 가입자 70명, 구매 전환율 42% 기록.</p>
-                            <div class="timeline-tags">
-                                <span class="timeline-tag">커뮤니티 운영</span>
-                                <span class="timeline-tag">전환율 42%</span>
                             </div>
                         </div>
                     </div>
@@ -957,74 +809,53 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                         <div class="timeline-content">
                             <span class="timeline-date">2022.12 — 2023.02</span>
                             <h3 class="timeline-role">전략기획 인턴</h3>
-                            <p class="timeline-desc">고객사 5개 담당. 사업계획서·IR·시장조사 보고서 작성, 사업 방향성 제안 및 CS 관리.</p>
+                            <span class="timeline-org">(주)애스크미</span>
+                            <p class="timeline-desc">고객사 5개 담당. 사업 컨설팅, 사업계획서·IR 작성, 고객사 미팅 및 CS 관리.</p>
                             <div class="timeline-tags">
-                                <span class="timeline-tag">사업계획서</span>
+                                <span class="timeline-tag">전략기획</span>
                                 <span class="timeline-tag">IR 작성</span>
+                                <span class="timeline-tag">고객사 5개</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ===== 프로젝트 / 학회 ===== -->
+            <!-- ===== 프로젝트 / 활동 ===== -->
             <div class="exp-group" id="exp-project">
-                <p class="exp-group-title">프로젝트 / 학회</p>
+                <p class="exp-group-title">프로젝트 / 활동</p>
                 <div class="timeline reveal">
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <span class="timeline-date">2023.06 — Present</span>
-                            <h3 class="timeline-role">AI 헬스 솔루션 기획자 (GymPT)</h3>
-                            <p class="timeline-desc">웨이트 자세 진단 솔루션 기획. LLM/RAG 기획, 82명 사용 인터뷰, 헬스장 계약 체결.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">LLM/RAG</span><span class="timeline-tag">82명 인터뷰</span></div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <span class="timeline-date">2023.06 — Present</span>
-                            <h3 class="timeline-role">인터뷰 매칭 플랫폼 기획자 (inuin)</h3>
-                            <p class="timeline-desc">정성적 인터뷰 매칭 플랫폼. 개발자 11명 협업, VoC 검증 완료, 한 달 이상 지속 매출 창출.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">11명 협업</span><span class="timeline-tag">지속 매출</span></div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
                             <span class="timeline-date">2023.06 — 2023.11</span>
-                            <h3 class="timeline-role">인턴 채용 솔루션 · 프로젝트 리더</h3>
-                            <p class="timeline-desc">중소기업 인턴 채용 플랫폼 기획. 대학생 21명 인턴 연계 완료, 빠른 가설 검증 후 피봇.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">21명 연계</span><span class="timeline-tag">가설 검증</span></div>
+                            <h3 class="timeline-role">중소기업 인턴채용 솔루션 'LittlePeople' 프로젝트 리딩</h3>
+                            <p class="timeline-desc">중소기업-대학생 연결 플랫폼. 21명 인턴 연계 완료, 시장성 검증 후 전략적 피봇 결정.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">21명 연계</span><span class="timeline-tag">수요 검증</span></div>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2023.03 — 2024.02</span>
-                            <h3 class="timeline-role">재무학회 · 리서치 / 펀드매니저</h3>
-                            <p class="timeline-desc">저평가 가치주 발굴·검증 리서치. 거시경제 분석~기업가치 추정. 리서치 챌린지 우수상.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">기업 분석</span><span class="timeline-tag">우수상</span></div>
+                            <h3 class="timeline-role">재무학회 재무연구회 41기 리서치·펀드매니저</h3>
+                            <p class="timeline-desc">저평가 가치주 발굴·검증. 거시경제 분석 ~ 기업가치 추정. 리서치 챌린지 수상 2건.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">재무 분석</span><span class="timeline-tag">펀드매니저</span></div>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
                             <span class="timeline-date">2022.09 — 2023.02</span>
-                            <h3 class="timeline-role">경영컨설팅 학회 PM · 스타트업 협업</h3>
-                            <p class="timeline-desc">소상공인 컨설팅, 스타트업 협업 4건 성사. 콜드메일 112개사 발송. 매출 차이 100만원↓ 기여.</p>
+                            <h3 class="timeline-role">대학연합 경영컨설팅 학회 PM</h3>
+                            <span class="timeline-org">SoME 스타트업 부문</span>
+                            <p class="timeline-desc">스타트업 협업 4건 성사. 콜드메일 112개 기업 전송. 소상공인 컨설팅으로 매출 차이 100만원 이상 감소.</p>
                             <div class="timeline-tags"><span class="timeline-tag">컨설팅</span><span class="timeline-tag">협업 4건</span></div>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
-                            <span class="timeline-date">2022.09 — 2023.02</span>
-                            <h3 class="timeline-role">대학연합 스타트업 · 리더 파트 11기</h3>
-                            <p class="timeline-desc">전국 대학연합 스타트업 조직에서 리더 파트로 활동하며 팀 운영 및 프로젝트 관리 경험.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">리더십</span></div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
                             <span class="timeline-date">2023.09 — 2023.12</span>
-                            <h3 class="timeline-role">청년 기업가정신 재단 · 대학생 서포터즈</h3>
-                            <p class="timeline-desc">거점센터 연계 대학생 서포터즈로 활동하며 창업 생태계를 경험.</p>
-                            <div class="timeline-tags"><span class="timeline-tag">서포터즈</span></div>
+                            <h3 class="timeline-role">스타트업 해커톤 및 공모전 다수 참가</h3>
+                            <p class="timeline-desc">다양한 해커톤과 공모전에 참가하며 사업 기획 역량을 검증했습니다.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">공모전 15+ 수상</span></div>
                         </div>
                     </div>
                 </div>
@@ -1037,28 +868,29 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
         <div class="container">
             <div class="reveal">
                 <span class="section-label">Product</span>
-                <h2 class="section-title">세상에 없는 서비스를 만드는 움직임</h2>
+                <h2 class="section-title">직접 만들고 운영한 프로덕트</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="product-grid reveal">
                 <div class="product-card">
-                    <div class="product-icon">💬</div>
-                    <h3>인터뷰 매칭 플랫폼</h3>
-                    <p>정성적 인터뷰 참여자를 연결하는 솔루션 플랫폼. 개발자 11명과 협업하며 서비스 기획자 겸 퍼블리셔로 참여, VoC 검증 완료 후 한 달 이상 지속 매출을 창출했습니다.</p>
+                    <div class="product-icon">🎙️</div>
+                    <h3>in u in — 정성적 인터뷰 매칭·솔루션 플랫폼</h3>
+                    <p>고객 인터뷰를 해줄 사람을 찾기 어렵다는 Pain Point에서 출발했습니다. 개발자 11명과 협업하며 서비스 기획자 겸 퍼블리셔로서 프로토타입을 개발했고, VoC 검증을 완료한 플랫폼으로 한 달 이상 지속적인 매출을 창출했습니다.</p>
                     <div class="product-stat">
                         <span>개발자 11명 협업</span>
-                        <span>지속 매출 창출</span>
+                        <span>Figma·React·JS</span>
                         <span>VoC 검증 완료</span>
+                        <span>지속 매출 창출</span>
                     </div>
                 </div>
                 <div class="product-card">
                     <div class="product-icon">🏋️</div>
-                    <h3>AI 헬스 자세 진단 솔루션</h3>
-                    <p>웨이트 트레이닝 자세 불균형·부상 위험을 진단하는 솔루션 기획. LLM 파인튜닝 및 RAG 기획, 82명 사용 인터뷰, 헬스장 계약 체결까지 달성했습니다.</p>
+                    <h3>GymPT — AI 웨이트트레이닝 자세 진단 솔루션</h3>
+                    <p>웨이트트레이닝 시 자세 불균형·부상 위험이라는 Pain Point를 DT로 해결하는 솔루션을 기획했습니다. LLM 기반 RAG 시스템을 설계하고, 82명 사용 인터뷰를 진행했습니다. 모교 기숙사·헬스 동아리·상도 헬스장과 서비스 계약을 체결했습니다.</p>
                     <div class="product-stat">
-                        <span>LLM/RAG 기획</span>
-                        <span>82명 인터뷰</span>
-                        <span>헬스장 계약 체결</span>
+                        <span>LLM/RAG 설계</span>
+                        <span>82명 사용 인터뷰</span>
+                        <span>서비스 계약 체결</span>
                     </div>
                 </div>
             </div>
@@ -1070,13 +902,13 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
         <div class="container">
             <div class="reveal">
                 <span class="section-label">Business</span>
-                <h2 class="section-title">'되는 사업'을 만들기 위한 여정</h2>
+                <h2 class="section-title">'되는 사업'을 만든 기록</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="business-hero reveal">
-                <span class="biz-label">Founder & CEO</span>
-                <h3>친환경 포장재 스타트업</h3>
-                <p>물에 녹아 잔류농약 제거가 가능한 과일 포장재를 개발. 과수농가·일반소비자·농협을 대상으로 300회 이상의 심층 인터뷰로 수요를 검증하고, 특허 출원, OEM·원재료 공급처 확보, 정부지원금 1.2억 확보까지 달성했습니다.</p>
+                <span class="biz-label">Founder · 기여도 100%</span>
+                <h3>zolv(사르르) — 물에 녹아 잔류농약 제거가 가능한 과일 포장재</h3>
+                <p>전 세계 일회용 포장재를 물에 녹는 포장재로 대체하겠다는 비전에서 출발했습니다. 과수농가·일반소비자·GAP 주무관 대상 300회 이상 심층 인터뷰로 수요를 검증하고, 시제품 제작, 특허 출원, 정부지원금 1.2억 확보, OEM·원재료 공급 확약, 전국 농협 337곳 유통 영업까지 직접 수행했습니다.</p>
                 <div class="biz-stats">
                     <div class="biz-stat-item">
                         <span class="stat-number">1.2억</span>
@@ -1084,25 +916,27 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                     </div>
                     <div class="biz-stat-item">
                         <span class="stat-number">300+</span>
-                        <span class="stat-label">고객 인터뷰 횟수</span>
+                        <span class="stat-label">현장 인터뷰</span>
                     </div>
                     <div class="biz-stat-item">
-                        <span class="stat-number">337곳</span>
+                        <span class="stat-number">337</span>
                         <span class="stat-label">농협 영업 (중앙 16 + 단위 321)</span>
                     </div>
                 </div>
                 <div class="biz-details">
+                    <span class="biz-detail-tag">3D 프린팅 시제품 제작</span>
                     <span class="biz-detail-tag">특허 출원 완료</span>
-                    <span class="biz-detail-tag">OEM 업체 확보</span>
-                    <span class="biz-detail-tag">원재료 공급 확약</span>
-                    <span class="biz-detail-tag">시제품 2종 제작</span>
-                    <span class="biz-detail-tag">창업 기업 선정 · 1,600만원</span>
-                    <span class="biz-detail-tag">사무실 확보 완료</span>
+                    <span class="biz-detail-tag">(주)대상 원재료 공급 확약</span>
+                    <span class="biz-detail-tag">(주)네이쳐스웨이 OEM 확약</span>
+                    <span class="biz-detail-tag">농협아그로 유통 확약</span>
+                    <span class="biz-detail-tag">중앙대 창업기업 선정 · 1,600만원</span>
+                    <span class="biz-detail-tag">GAP 주무관 32명 인터뷰</span>
+                    <span class="biz-detail-tag">환경산업기술원 제품 환경성 시험 상담</span>
                 </div>
             </div>
             <div class="business-sub reveal">
-                <h4>인턴 채용 플랫폼</h4>
-                <p>중소기업과 인턴 수요자를 연결하는 플랫폼을 기획. 대학생 21명의 인턴 연계를 완료했으나, 빠른 가설 검증 결과 시장성이 부족하다 판단하여 피봇. 빠른 시도와 빠른 실패, 그리고 빠른 재시도의 중요성을 체화한 경험입니다.</p>
+                <h4>LittlePeople — 중소기업 인턴채용 솔루션</h4>
+                <p>중소기업과 대학생을 연결하는 인턴 채용 플랫폼을 기획하고 운영했습니다. 21명 인턴 연계를 완료했으나 시장성 검증 결과 피봇을 결정. 실행보다 빠른 검증이 더 가치 있다는 것을 현장에서 증명한 경험입니다.</p>
             </div>
         </div>
     </section>
@@ -1112,15 +946,14 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
         <div class="container">
             <div class="reveal">
                 <span class="section-label">Awards</span>
-                <h2 class="section-title">수상 내역</h2>
+                <h2 class="section-title">수상 이력</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="awards-summary reveal">
-                <div class="award-count"><span class="num">15+</span><span class="label">Total</span></div>
+                <div class="award-count"><span class="num">17</span><span class="label">Total</span></div>
                 <div class="award-count"><span class="num">5</span><span class="label">대상</span></div>
-                <div class="award-count"><span class="num">4</span><span class="label">우수상</span></div>
-                <div class="award-count"><span class="num">4</span><span class="label">장려상</span></div>
-                <div class="award-count"><span class="num">2</span><span class="label">은상·기타</span></div>
+                <div class="award-count"><span class="num">5</span><span class="label">우수</span></div>
+                <div class="award-count"><span class="num">3</span><span class="label">은상·장려</span></div>
             </div>
             <div class="awards-list reveal">
                 <div class="award-item">
@@ -1129,48 +962,48 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                     <span class="award-rank">수상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🌍</div>
-                    <div class="award-text"><h4>국제 창업 대회 (보스턴)</h4><p>2024.06 · 글로벌</p></div>
-                    <span class="award-rank">은상</span>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>HULT PRIZE in Boston</h4><p>2024.06</p></div>
+                    <span class="award-rank">Final Top 6</span>
                 </div>
                 <div class="award-item">
                     <div class="award-icon">🏆</div>
-                    <div class="award-text"><h4>국제 연합 해커톤</h4><p>2024.05 · 베트남 연합</p></div>
+                    <div class="award-text"><h4>PTIT 베트남대 × CAU 연합 해커톤</h4><p>2024.05</p></div>
                     <span class="award-rank">대상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥇</div>
-                    <div class="award-text"><h4>아이디어 해커톤</h4><p>2024.05</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>UMC 아이디어 해커톤</h4><p>2024.05</p></div>
                     <span class="award-rank">우수상</span>
                 </div>
                 <div class="award-item">
                     <div class="award-icon">🏆</div>
-                    <div class="award-text"><h4>소셜벤처 창업 경진대회</h4><p>2024.02</p></div>
+                    <div class="award-text"><h4>학생 소셜벤처 창업 경진대회</h4><p>2024.02</p></div>
                     <span class="award-rank">대상</span>
                 </div>
                 <div class="award-item">
                     <div class="award-icon">🏆</div>
-                    <div class="award-text"><h4>국제 창업 대회 Local Summit</h4><p>2024.01</p></div>
+                    <div class="award-text"><h4>Hult Prize Local Summit</h4><p>2024.01</p></div>
                     <span class="award-rank">대상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥈</div>
-                    <div class="award-text"><h4>글로벌 시장 진출 기획 창업가 육성</h4><p>2024.02</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>G-Star 고성장 글로벌 시장진출 기획 창업가 육성</h4><p>2024.02</p></div>
                     <span class="award-rank">장려상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥇</div>
-                    <div class="award-text"><h4>리서치 챌린지 대회</h4><p>2024.01</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>KATCH 리서치 챌린지 대회</h4><p>2024.01</p></div>
                     <span class="award-rank">우수상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥇</div>
-                    <div class="award-text"><h4>재무 리서치 챌린지</h4><p>2023.12</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>CAU FRI CHALLENGE</h4><p>2023.12</p></div>
                     <span class="award-rank">우수상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥈</div>
-                    <div class="award-text"><h4>국제 해커톤 VCC 캠프</h4><p>2023.12</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>VCC 캠프 국제 해커톤</h4><p>2023.12</p></div>
                     <span class="award-rank">장려상</span>
                 </div>
                 <div class="award-item">
@@ -1180,32 +1013,32 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                 </div>
                 <div class="award-item">
                     <div class="award-icon">🏆</div>
-                    <div class="award-text"><h4>특허 경진대회</h4><p>2023.11 · 글로컬 이노베이터</p></div>
+                    <div class="award-text"><h4>글로컬 이노베이터 특허 경진대회</h4><p>2023.11</p></div>
                     <span class="award-rank">대상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥈</div>
-                    <div class="award-text"><h4>지역 혁신 창업 대회</h4><p>2023.10</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>썸썸 BLUE IN 경남</h4><p>2023.10</p></div>
                     <span class="award-rank">장려상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥈</div>
-                    <div class="award-text"><h4>지역 창업 경진대회</h4><p>2023.09</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>동작! 창업 경진대회</h4><p>2023.09</p></div>
                     <span class="award-rank">장려상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥇</div>
+                    <div class="award-icon">🏆</div>
                     <div class="award-text"><h4>메이커 해커톤</h4><p>2023.09</p></div>
                     <span class="award-rank">우수상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥈</div>
-                    <div class="award-text"><h4>경영 대학 창업 경진대회</h4><p>2023.09</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>경영경제대학 창업 경진대회</h4><p>2023.09</p></div>
                     <span class="award-rank">장려상</span>
                 </div>
                 <div class="award-item">
-                    <div class="award-icon">🥇</div>
-                    <div class="award-text"><h4>코어톤 대회</h4><p>2023.08</p></div>
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>ICC 코어톤</h4><p>2023.08</p></div>
                     <span class="award-rank">우수상</span>
                 </div>
             </div>
@@ -1217,14 +1050,14 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
         <div class="container">
             <div class="reveal">
                 <span class="section-label">Education & Skills</span>
-                <h2 class="section-title">학력 · 역량</h2>
+                <h2 class="section-title">기반 역량</h2>
                 <div class="section-divider"></div>
             </div>
             <div class="edu-grid reveal">
                 <div class="edu-block">
                     <h3>Education</h3>
-                    <h4>서울 소재 4년제 대학교</h4>
-                    <p>경영학과 졸업 예정</p>
+                    <h4>중앙대학교 경영학과</h4>
+                    <p></p>
                     <div style="margin-top: 32px;">
                         <h3>Tools</h3>
                         <div class="tools-wrap">
@@ -1243,13 +1076,11 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                 </div>
                 <div class="edu-block">
                     <h3>Continuous Learning</h3>
-                    <div class="learning-item"><span class="learning-dot"></span><span>재무분석 전문 과정 수료 (전략 재무 · 전략 엑셀)</span></div>
-                    <div class="learning-item"><span class="learning-dot"></span><span>머신러닝 및 LLM 활용 독학 중 (Udemy)</span></div>
-                    <div class="learning-item"><span class="learning-dot"></span><span>GA4 · SQL 기반 데이터 의사결정 역량 강화 중</span></div>
-                    <div class="learning-item"><span class="learning-dot"></span><span>ESG 전문 경영 강좌 수료</span></div>
-                    <div class="learning-item"><span class="learning-dot"></span><span>금융 연수 프로그램 수료</span></div>
-                    <div class="learning-item"><span class="learning-dot"></span><span>재무학회 리서치 · 펀드매니저 활동</span></div>
-                    <div class="learning-item"><span class="learning-dot"></span><span>베트남 개발자와 개발 외주업 병행 중</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>스타트업 전략 컨설팅 실무 (WeThru 자체 프로젝트 기반)</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>머신러닝 및 LLM 활용 독학 (Udemy)</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>GA4 및 SQL 기반 데이터 분석 독학</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>insightBay 전략재무·전략엑셀 강의 완강</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>사업계획서 작성 및 IR 피칭 실전 경험</span></div>
                 </div>
             </div>
         </div>
@@ -1294,7 +1125,6 @@ src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/refs/heads/main/Profe
                     group.classList.remove('active');
                     if (group.id === targetId) {
                         group.classList.add('active');
-                        // re-trigger reveal for newly visible content
                         group.querySelectorAll('.reveal').forEach(el => {
                             revealObserver.observe(el);
                         });
