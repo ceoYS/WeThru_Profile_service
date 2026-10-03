@@ -127,6 +127,20 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             object-fit: cover; object-position: center; border-radius: 50%; z-index: 2;
         }
+        .avatar-photo--lightweight {
+            display: flex; align-items: center; justify-content: center;
+            background:
+              radial-gradient(circle at 35% 28%, rgba(226,209,160,0.16), transparent 34%),
+              linear-gradient(145deg, #211B12 0%, #0F0F0F 72%);
+            color: var(--gold-light);
+            font-family: var(--sans); font-size: 3rem; font-weight: 800;
+            letter-spacing: 0.08em;
+            border: 1px solid rgba(201,168,76,0.16);
+        }
+        .avatar-photo--lightweight span {
+            transform: translateX(0.04em);
+            text-shadow: 0 0 30px rgba(201,168,76,0.18);
+        }
         .avatar-label {
             position: absolute; bottom: -36px; left: 50%; transform: translateX(-50%);
             font-family: var(--serif); font-style: italic; font-size: 0.8rem;
@@ -451,10 +465,7 @@
                 </div>
                 <div class="avatar-wrapper">
                     <div class="avatar-circle">
-                        <img
-                            src="https://github.com/ceoYS/Profile_Photo/blob/main/my%20picture2.png?raw=true"
-                            alt="선윤성 Profile Photo"
-                            class="avatar-photo">
+                        <div class="avatar-photo avatar-photo--lightweight" role="img" aria-label="프로필 이미지 예시"><span>YS</span></div>
                     </div>
                     <span class="avatar-label">Portfolio</span>
                 </div>
