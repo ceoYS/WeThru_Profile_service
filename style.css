@@ -4145,3 +4145,87 @@ button:focus-visible {
     opacity: 0.62;
   }
 }
+
+
+/* Hero preview interaction note */
+.hero__mockup-scroll-note {
+  width: 100%;
+  margin-top: 10px;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0.65;
+  word-break: keep-all;
+}
+
+.hero__proof-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* The original proof lives inside the mockup column, which can inherit
+     a desktop-side alignment. Hide it on mobile and render a dedicated
+     full-width proof directly under the hero content instead. */
+  .hero__mockup > .hero__proof {
+    display: none !important;
+  }
+
+  .hero__proof-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: calc(100% - 8px);
+    max-width: 340px;
+    margin: -4px auto 0;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    border: 1px solid rgba(201, 168, 76, 0.16);
+    border-radius: 8px;
+    background: rgba(8, 8, 8, 0.42);
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+    position: relative;
+    left: 0;
+    right: 0;
+    transform: none;
+  }
+
+  .hero__proof-mobile .hero__proof-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .hero__proof-mobile .hero__proof-number,
+  .hero__proof-mobile .hero__proof-label {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center !important;
+  }
+
+  .hero__proof-mobile .hero__proof-divider {
+    width: 100%;
+    height: 1px;
+    margin: 0 auto;
+    background: rgba(201, 168, 76, 0.2);
+  }
+
+  .hero__mockup-scroll-note {
+    width: min(100%, 340px);
+    margin: 10px auto 0;
+    padding: 0 8px;
+    box-sizing: border-box;
+    font-size: 10.5px;
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0.68;
+  }
+}
