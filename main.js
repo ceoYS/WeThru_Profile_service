@@ -380,8 +380,7 @@
   /* --- Init --- */
   document.addEventListener('DOMContentLoaded', function () {
     initNav();
-    initHeroWords();
-    initHeroGradient();
+    initHeroWords();
     initRevealObserver();
     initStaggerObserver();
     initCountUp();
