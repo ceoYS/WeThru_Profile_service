@@ -414,6 +414,262 @@
             .biz-stats { flex-direction: column; gap: 20px; }
             .biz-details { flex-direction: column; }
         }
+    
+        /* ===== 2026 EDITORIAL HERO REFINEMENT =====
+           Keep the real profile photo untouched. Visual hierarchy comes from
+           spacing, type and crop rather than glow/animation-heavy decoration. */
+        .hero--editorial {
+            min-height: 100vh;
+            padding: 132px 0 82px;
+            align-items: center;
+            background: #0b0b0a;
+        }
+        .hero--editorial::before {
+            display: none;
+        }
+        .hero--editorial::after {
+            background: rgba(255,255,255,0.08);
+        }
+        .hero--editorial .hero-content {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
+            align-items: end;
+            gap: clamp(52px, 7vw, 96px);
+        }
+        .hero-kicker {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 580px;
+            margin-bottom: 52px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(245,245,245,0.14);
+            color: rgba(245,245,245,0.46);
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+        }
+        .hero--editorial .hero-label {
+            margin-bottom: 15px;
+            color: #c9a84c;
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            font-style: normal;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+        }
+        .hero--editorial .hero-name {
+            max-width: 690px;
+            margin-bottom: 23px;
+            font-size: clamp(3.6rem, 6.3vw, 5.5rem);
+            font-weight: 760;
+            line-height: 0.99;
+            letter-spacing: -0.055em;
+            text-wrap: balance;
+        }
+        .hero--editorial .hero-sub {
+            margin-bottom: 27px;
+            color: rgba(245,245,245,0.58);
+            font-family: var(--sans);
+            font-size: 0.86rem;
+            font-style: normal;
+            font-weight: 500;
+            letter-spacing: 0.015em;
+        }
+        .hero--editorial .hero-desc {
+            max-width: 560px;
+            color: rgba(245,245,245,0.72);
+            font-size: 0.93rem;
+            line-height: 1.85;
+        }
+        .hero-facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            max-width: 580px;
+            margin-top: 34px;
+            border-top: 1px solid rgba(245,245,245,0.12);
+            border-bottom: 1px solid rgba(245,245,245,0.12);
+        }
+        .hero-facts span {
+            min-width: 150px;
+            padding: 14px 22px 14px 0;
+            color: rgba(245,245,245,0.43);
+            font-size: 0.68rem;
+            letter-spacing: 0.035em;
+        }
+        .hero-facts span + span {
+            padding-left: 22px;
+            border-left: 1px solid rgba(245,245,245,0.1);
+        }
+        .hero-facts b {
+            display: block;
+            margin-bottom: 2px;
+            color: #f3f0e8;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .hero--editorial .hero-scroll-hint {
+            margin-top: 36px;
+            gap: 10px;
+            color: rgba(245,245,245,0.32);
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+        }
+        .hero--editorial .hero-scroll-hint .line {
+            width: 30px;
+            background: rgba(201,168,76,0.78);
+        }
+
+        .hero--editorial .avatar-wrapper {
+            width: 100%;
+            height: auto;
+            margin: 0;
+            position: relative;
+        }
+        .hero--editorial .avatar-circle {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            height: auto;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.13);
+            border-radius: 2px;
+            background: #141413;
+            box-shadow: none;
+        }
+        .hero--editorial .avatar-circle::before {
+            display: none;
+            animation: none;
+        }
+        .hero--editorial .avatar-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            object-fit: cover;
+            object-position: center center;
+            filter: none;
+        }
+        .hero--editorial .avatar-caption {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 18px;
+            align-items: baseline;
+            margin-top: 13px;
+            padding-top: 11px;
+            border-top: 1px solid rgba(245,245,245,0.13);
+        }
+        .avatar-caption__name {
+            color: #f4f1e9;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+        .avatar-caption__role {
+            color: rgba(245,245,245,0.38);
+            font-size: 0.66rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            text-align: right;
+        }
+        .hero--editorial .avatar-label {
+            display: none;
+        }
+
+        @media (max-width: 1024px) {
+            .hero--editorial .hero-content {
+                grid-template-columns: minmax(0, 1fr) 340px;
+                gap: 48px;
+            }
+            .hero--editorial .avatar-wrapper {
+                width: 100%;
+                height: auto;
+            }
+            .hero--editorial .hero-name {
+                font-size: clamp(3rem, 5.8vw, 4.4rem);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero--editorial {
+                min-height: auto;
+                padding: 96px 0 58px;
+            }
+            .hero--editorial .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 34px;
+                text-align: left;
+            }
+            .hero--editorial .avatar-wrapper {
+                order: -1;
+                width: min(100%, 420px);
+                margin: 0 auto;
+            }
+            .hero--editorial .avatar-circle {
+                aspect-ratio: 4 / 4.7;
+            }
+            .hero--editorial .hero-text {
+                width: 100%;
+            }
+            .hero-kicker {
+                margin-bottom: 30px;
+            }
+            .hero--editorial .hero-name {
+                font-size: clamp(2.7rem, 12vw, 4rem);
+            }
+            .hero--editorial .hero-desc {
+                margin: 0;
+            }
+            .hero-facts {
+                width: 100%;
+            }
+            .hero-facts span {
+                flex: 1 1 33%;
+                min-width: 0;
+                padding: 12px 10px 12px 0;
+            }
+            .hero-facts span + span {
+                padding-left: 10px;
+            }
+            .hero--editorial .hero-scroll-hint {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero--editorial {
+                padding-top: 84px;
+            }
+            .hero--editorial .avatar-wrapper {
+                width: 100%;
+            }
+            .hero--editorial .avatar-caption {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+            .avatar-caption__role {
+                text-align: left;
+            }
+            .hero-kicker {
+                font-size: 0.6rem;
+                margin-bottom: 26px;
+            }
+            .hero--editorial .hero-label {
+                font-size: 0.64rem;
+            }
+            .hero--editorial .hero-name {
+                font-size: 2.65rem;
+            }
+            .hero-facts span {
+                font-size: 0.58rem;
+            }
+            .hero-facts b {
+                font-size: 0.9rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -433,23 +689,33 @@
     </header>
 
     <!-- ===== HERO ===== -->
-    <section class="hero" id="hero">
+    <section class="hero hero--editorial" id="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <span class="hero-label">Strategic Planner</span>
-                    <h1 class="hero-name">전략 기획자</h1>
+                    <div class="hero-kicker">
+                        <span>01 / BUSINESS PROFILE</span>
+                        <span>WETHRU</span>
+                    </div>
+                    <span class="hero-label">STRATEGY · BUSINESS · AI</span>
+                    <h1 class="hero-name">전략을<br>실행으로 옮기는 사람.</h1>
                     <p class="hero-sub">Strategic Planner · Business Developer · Founder</p>
                     <p class="hero-desc">
                         현장 인터뷰 300회, 정부지원금 1.2억 확보, H그룹 AI 전략기획까지.<br>
                         사업의 청사진을 직접 검증하고 실행해온 전략가입니다.
                     </p>
+                    <div class="hero-facts" aria-label="주요 지표">
+                        <span><b>300+</b> Field Interviews</span>
+                        <span><b>1.2억</b> Funding</span>
+                        <span><b>AI</b> Strategy</span>
+                    </div>
                     <div class="hero-scroll-hint">
                         <span class="line"></span>
                         <span>Scroll to explore</span>
                     </div>
                 </div>
-                <div class="avatar-wrapper">
+
+                <figure class="avatar-wrapper">
                     <div class="avatar-circle">
                         <img
                             src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/main/my%20picture2.png?v=20261003-1725"
@@ -458,13 +724,16 @@
                             decoding="async"
                             fetchpriority="high">
                     </div>
-                    <span class="avatar-label">Portfolio</span>
-                </div>
+                    <figcaption class="avatar-caption">
+                        <span class="avatar-caption__name">선윤성</span>
+                        <span class="avatar-caption__role">Strategic Planner · Founder</span>
+                    </figcaption>
+                </figure>
             </div>
         </div>
     </section>
 
-    <!-- ===== ABOUT ===== -->
+        <!-- ===== ABOUT ===== -->
     <section class="about" id="about">
         <div class="container">
             <div class="reveal">
