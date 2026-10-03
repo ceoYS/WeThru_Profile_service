@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Planner | WeThru</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+
+    <style>
+        :root {
+            --bg-primary: #0A0A0A;
+            --bg-secondary: #111111;
+            --bg-surface: #1A1A1A;
+            --bg-surface-hover: #222222;
+            --gold: #C9A84C;
+            --gold-light: #E2D1A0;
+            --gold-dim: rgba(201, 168, 76, 0.15);
+            --gold-border: rgba(201, 168, 76, 0.3);
+            --white: #F5F5F5;
+            --white-dim: rgba(245, 245, 245, 0.7);
+            --white-muted: rgba(245, 245, 245, 0.4);
+            --serif: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            --sans: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--sans);
+            background-color: var(--bg-primary);
+            color: var(--white);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== HEADER ===== */
+        header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            padding: 24px 0; transition: var(--transition);
+        }
+        header.scrolled {
+            background: rgba(10,10,10,0.85); backdrop-filter: blur(20px);
+            padding: 16px 0; border-bottom: 1px solid rgba(201,168,76,0.08);
+        }
+        .header-inner { display: flex; justify-content: space-between; align-items: center; }
+        .logo {
+            font-family: var(--sans); font-weight: 800; font-size: 0.85rem;
+            letter-spacing: 4px; color: var(--gold); text-transform: uppercase;
+        }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a {
+            font-size: 0.75rem; font-weight: 500; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--white-muted);
+            text-decoration: none; transition: var(--transition); position: relative;
+        }
+        .nav-links a::after {
+            content: ''; position: absolute; bottom: -4px; left: 0;
+            width: 0; height: 1px; background: var(--gold); transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden; background: var(--bg-primary);
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -30%; right: -10%;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 1px; background: linear-gradient(90deg, transparent, var(--gold-border), transparent);
+        }
+        .hero-content {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 60px; width: 100%; position: relative; z-index: 2;
+        }
+        .hero-text { flex: 1; }
+        .hero-label {
+            font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+            color: var(--gold); letter-spacing: 3px; margin-bottom: 16px; display: block;
+        }
+        .hero-name {
+            font-family: var(--sans); font-weight: 800;
+            font-size: clamp(3rem, 6vw, 4.5rem); line-height: 1.1;
+            color: var(--white); margin-bottom: 16px; letter-spacing: -1px;
+        }
+        .hero-sub {
+            font-family: var(--serif); font-style: italic; font-size: 1.1rem;
+            color: var(--white-muted); margin-bottom: 32px; letter-spacing: 0.5px;
+        }
+        .hero-desc {
+            font-size: 0.95rem; color: var(--white-dim); max-width: 480px;
+            line-height: 1.8; word-break: keep-all;
+        }
+        .hero-scroll-hint {
+            margin-top: 48px; display: flex; align-items: center; gap: 12px;
+            color: var(--white-muted); font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+        }
+        .hero-scroll-hint .line { width: 40px; height: 1px; background: var(--gold); }
+
+        /* === 아바타 === */
+        .avatar-wrapper { flex-shrink: 0; width: 380px; height: 380px; position: relative; }
+        .avatar-circle {
+            width: 100%; height: 100%; border-radius: 50%;
+            background: linear-gradient(145deg, #1A1A1A 0%, #0F0F0F 100%);
+            border: 1.5px solid var(--gold-border); position: relative; overflow: hidden;
+            box-shadow: 0 0 80px rgba(201,168,76,0.06), inset 0 0 60px rgba(0,0,0,0.4);
+        }
+        .avatar-circle::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(from 0deg, transparent 0%, rgba(201,168,76,0.03) 25%, transparent 50%);
+            animation: avatarRotate 20s linear infinite;
+        }
+        @keyframes avatarRotate { to { transform: rotate(360deg); } }
+        .avatar-photo {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; object-position: center; border-radius: 50%; z-index: 2;
+        }
+.avatar-label {
+            position: absolute; bottom: -36px; left: 50%; transform: translateX(-50%);
+            font-family: var(--serif); font-style: italic; font-size: 0.8rem;
+            color: var(--gold); letter-spacing: 4px; text-transform: uppercase;
+            white-space: nowrap; opacity: 0.6;
+        }
+
+        /* ===== SECTIONS COMMON ===== */
+        section { padding: 140px 0; position: relative; }
+        .section-label {
+            font-family: var(--serif); font-style: italic; font-size: 1.3rem;
+            color: var(--gold); letter-spacing: 2px; margin-bottom: 12px; display: block;
+        }
+        .section-title {
+            font-family: var(--sans); font-weight: 800;
+            font-size: clamp(2rem, 4vw, 2.8rem); color: var(--white);
+            margin-bottom: 20px; letter-spacing: -0.5px;
+        }
+        .section-divider { width: 48px; height: 1.5px; background: var(--gold); margin-bottom: 60px; }
+        .section-desc {
+            font-size: 1.05rem; color: var(--white-dim); max-width: 700px;
+            line-height: 1.9; margin-bottom: 60px; word-break: keep-all;
+        }
+
+        /* ===== ABOUT ===== */
+        .about { background: var(--bg-secondary); }
+        .strength-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .strength-card {
+            background: var(--bg-surface); border-radius: 16px; padding: 36px 28px;
+            border-top: 2px solid var(--gold); transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .strength-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 80px;
+            background: linear-gradient(180deg, rgba(201,168,76,0.04), transparent); pointer-events: none;
+        }
+        .strength-card:hover {
+            transform: translateY(-6px); background: var(--bg-surface-hover);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .strength-card .card-num {
+            font-family: var(--serif); font-style: italic; font-size: 2.2rem;
+            color: rgba(201,168,76,0.2); margin-bottom: 20px; display: block; line-height: 1;
+        }
+        .strength-card h3 { font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 12px; }
+        .strength-card p { font-size: 0.85rem; color: var(--white-muted); line-height: 1.7; word-break: keep-all; }
+
+        /* ===== EXPERIENCE ===== */
+        .experience { background: var(--bg-primary); }
+        .exp-category-tabs {
+            display: flex; gap: 12px; margin-bottom: 50px; flex-wrap: wrap;
+        }
+        .exp-tab {
+            padding: 10px 24px; border-radius: 30px; border: 1px solid var(--gold-border);
+            background: transparent; color: var(--gold); font-size: 0.8rem; font-weight: 600;
+            cursor: pointer; transition: var(--transition); font-family: var(--sans);
+            letter-spacing: 0.5px;
+        }
+        .exp-tab:hover, .exp-tab.active {
+            background: var(--gold); color: var(--bg-primary); border-color: var(--gold);
+        }
+        .exp-group { display: none; }
+        .exp-group.active { display: block; }
+        .exp-group-title {
+            font-family: var(--serif); font-style: italic; font-size: 1.1rem;
+            color: var(--gold); margin-bottom: 32px; padding-bottom: 12px;
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+        }
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 40px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 1.5px; background: linear-gradient(180deg, var(--gold), var(--gold-border), transparent);
+        }
+        .timeline-item { position: relative; margin-bottom: 48px; padding-left: 36px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -40px; top: 6px;
+            width: 12px; height: 12px; background: var(--bg-primary);
+            border: 2px solid var(--gold); border-radius: 50%; z-index: 2;
+        }
+        .timeline-item::after {
+            content: ''; position: absolute; left: -36px; top: 10px;
+            width: 4px; height: 4px; background: var(--gold); border-radius: 50%; z-index: 3;
+        }
+        .timeline-item.current::before {
+            border-color: var(--gold); background: var(--gold);
+            box-shadow: 0 0 12px rgba(201,168,76,0.4);
+        }
+        .timeline-content {
+            background: var(--bg-surface); border-radius: 14px; padding: 28px 32px;
+            transition: var(--transition); border: 1px solid rgba(255,255,255,0.03);
+        }
+        .timeline-content:hover {
+            border-color: var(--gold-border); box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        .timeline-date {
+            font-family: var(--serif); font-style: italic; font-size: 0.88rem;
+            color: var(--gold); margin-bottom: 6px; display: block;
+        }
+        .timeline-role { font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 8px; }
+        .timeline-org {
+            font-size: 0.82rem; color: var(--gold-light); font-weight: 500;
+            margin-bottom: 10px; display: block;
+        }
+        .timeline-desc { font-size: 0.84rem; color: var(--white-muted); line-height: 1.75; word-break: keep-all; }
+        .timeline-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+        .timeline-tag {
+            display: inline-block; padding: 4px 14px; background: var(--gold-dim);
+            color: var(--gold); font-size: 0.7rem; font-weight: 600;
+            border-radius: 20px; letter-spacing: 0.5px;
+        }
+        .timeline-tag.badge-current {
+            background: rgba(201,168,76,0.25); border: 1px solid var(--gold);
+        }
+
+        /* ===== PRODUCT ===== */
+        .product { background: var(--bg-secondary); }
+        .product-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+        .product-card {
+            background: var(--bg-surface); border-radius: 18px; padding: 44px 36px;
+            border: 1px solid rgba(255,255,255,0.03); transition: var(--transition);
+            position: relative; overflow: hidden;
+        }
+        .product-card::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 100%; height: 3px; background: linear-gradient(90deg, var(--gold), transparent);
+        }
+        .product-card:hover {
+            border-color: var(--gold-border); transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        }
+        .product-card .product-icon {
+            width: 56px; height: 56px; background: var(--gold-dim); border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 24px; font-size: 1.5rem;
+        }
+        .product-card h3 { font-weight: 700; font-size: 1.2rem; color: var(--white); margin-bottom: 14px; }
+        .product-card p {
+            font-size: 0.88rem; color: var(--white-muted); line-height: 1.8;
+            word-break: keep-all; margin-bottom: 20px;
+        }
+        .product-stat { display: flex; gap: 10px; flex-wrap: wrap; }
+        .product-stat span {
+            font-size: 0.73rem; padding: 5px 14px;
+            background: rgba(201,168,76,0.08); border: 1px solid var(--gold-border);
+            border-radius: 6px; color: var(--gold-light); font-weight: 500;
+        }
+
+        /* ===== BUSINESS ===== */
+        .business { background: var(--bg-primary); }
+        .business-hero {
+            background: var(--bg-surface); border-radius: 24px; padding: 60px 50px;
+            border: 1px solid rgba(255,255,255,0.04); margin-bottom: 40px;
+            position: relative; overflow: hidden;
+        }
+        .business-hero::before {
+            content: ''; position: absolute; top: 0; right: 0;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(201,168,76,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .business-hero .biz-label {
+            font-family: var(--serif); font-style: italic; font-size: 0.95rem;
+            color: var(--gold); margin-bottom: 8px; display: block;
+        }
+        .business-hero h3 { font-weight: 800; font-size: 1.6rem; color: var(--white); margin-bottom: 16px; }
+        .business-hero > p {
+            font-size: 0.92rem; color: var(--white-dim); max-width: 600px;
+            line-height: 1.8; margin-bottom: 40px; word-break: keep-all;
+        }
+        .biz-stats { display: flex; gap: 48px; flex-wrap: wrap; }
+        .biz-stat-item { text-align: left; }
+        .biz-stat-item .stat-number {
+            font-family: var(--serif); font-style: italic; font-size: 3rem;
+            font-weight: 700; color: var(--gold); line-height: 1.1; display: block; margin-bottom: 4px;
+        }
+        .biz-stat-item .stat-label { font-size: 0.78rem; color: var(--white-muted); letter-spacing: 0.5px; }
+        .biz-details { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 36px; }
+        .biz-detail-tag {
+            padding: 8px 20px; background: rgba(201,168,76,0.08);
+            border: 1px solid var(--gold-border); border-radius: 8px;
+            font-size: 0.8rem; color: var(--gold-light); font-weight: 500;
+        }
+        .business-sub {
+            background: var(--bg-surface); border-radius: 16px; padding: 36px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .business-sub h4 { font-weight: 700; font-size: 1.05rem; color: var(--white); margin-bottom: 10px; }
+        .business-sub p { font-size: 0.85rem; color: var(--white-muted); line-height: 1.7; word-break: keep-all; }
+
+        /* ===== AWARDS ===== */
+        .awards { background: var(--bg-secondary); }
+        .awards-summary { display: flex; gap: 24px; margin-bottom: 50px; flex-wrap: wrap; }
+        .award-count {
+            text-align: center; padding: 28px 32px; background: var(--bg-surface);
+            border-radius: 14px; border: 1px solid rgba(255,255,255,0.03); min-width: 120px;
+        }
+        .award-count .num {
+            font-family: var(--serif); font-style: italic; font-size: 2.8rem;
+            font-weight: 700; color: var(--gold); line-height: 1; display: block; margin-bottom: 6px;
+        }
+        .award-count .label { font-size: 0.75rem; color: var(--white-muted); letter-spacing: 1px; text-transform: uppercase; }
+        .awards-list { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .award-item {
+            display: flex; align-items: center; gap: 16px; padding: 20px 22px;
+            background: var(--bg-surface); border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.02); transition: var(--transition);
+        }
+        .award-item:hover { border-color: var(--gold-border); background: var(--bg-surface-hover); }
+        .award-item .award-icon {
+            width: 42px; height: 42px; background: var(--gold-dim); border-radius: 10px;
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem;
+        }
+        .award-item .award-text h4 { font-weight: 600; font-size: 0.88rem; color: var(--white); margin-bottom: 3px; }
+        .award-item .award-text p { font-size: 0.73rem; color: var(--white-muted); }
+        .award-item .award-rank {
+            margin-left: auto; font-family: var(--serif); font-style: italic;
+            font-size: 0.8rem; color: var(--gold); white-space: nowrap; flex-shrink: 0;
+        }
+
+        /* ===== EDUCATION ===== */
+        .education { background: var(--bg-primary); }
+        .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .edu-block {
+            background: var(--bg-surface); border-radius: 16px; padding: 40px 36px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .edu-block h3 {
+            font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+            color: var(--gold); margin-bottom: 24px;
+        }
+        .edu-block h4 { font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 8px; }
+        .edu-block p { font-size: 0.85rem; color: var(--white-muted); margin-bottom: 4px; }
+        .tools-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .tool-tag {
+            padding: 6px 16px; background: var(--gold-dim); border: 1px solid var(--gold-border);
+            border-radius: 6px; font-size: 0.78rem; color: var(--gold-light); font-weight: 500;
+        }
+        .learning-item { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .learning-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+        .learning-item span { font-size: 0.88rem; color: var(--white-dim); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--bg-primary); padding: 60px 0; text-align: center;
+            border-top: 1px solid rgba(201,168,76,0.08);
+        }
+        .footer-logo {
+            font-family: var(--sans); font-weight: 800; font-size: 1rem;
+            letter-spacing: 5px; color: var(--gold); margin-bottom: 14px; text-transform: uppercase;
+        }
+        .footer-tagline { font-family: var(--serif); font-style: italic; font-size: 0.9rem; color: var(--white-muted); margin-bottom: 10px; }
+        .footer-copy { font-size: 0.7rem; color: rgba(245,245,245,0.2); letter-spacing: 1px; }
+
+        /* ===== REVEAL ===== */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .avatar-wrapper { width: 300px; height: 300px; }
+            .strength-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            section { padding: 100px 0; }
+            .nav-links { display: none; }
+            .hero-content { flex-direction: column-reverse; text-align: center; gap: 40px; }
+            .hero-desc { margin: 0 auto; }
+            .hero-scroll-hint { justify-content: center; }
+            .avatar-wrapper { width: 220px; height: 220px; }
+            .strength-grid { grid-template-columns: 1fr; }
+            .product-grid { grid-template-columns: 1fr; }
+            .business-hero { padding: 36px 24px; }
+            .biz-stats { gap: 24px; }
+            .biz-stat-item .stat-number { font-size: 2.2rem; }
+            .awards-list { grid-template-columns: 1fr; }
+            .awards-summary { gap: 12px; }
+            .award-count { min-width: 80px; padding: 18px 16px; }
+            .award-count .num { font-size: 2rem; }
+            .edu-grid { grid-template-columns: 1fr; }
+            .exp-category-tabs { gap: 8px; }
+            .exp-tab { padding: 8px 16px; font-size: 0.72rem; }
+        }
+        @media (max-width: 480px) {
+            .hero-name { font-size: 2.4rem; }
+            .biz-stats { flex-direction: column; gap: 20px; }
+            .biz-details { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <div class="container header-inner">
+            <div class="logo">WETHRU</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#product">Product</a></li>
+                <li><a href="#business">Business</a></li>
+                <li><a href="#awards">Awards</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-label">Strategic Planner</span>
+                    <h1 class="hero-name">전략 기획자</h1>
+                    <p class="hero-sub">Strategic Planner · Business Developer · Founder</p>
+                    <p class="hero-desc">
+                        현장 인터뷰 300회, 정부지원금 1.2억 확보, H그룹 AI 전략기획까지.<br>
+                        사업의 청사진을 직접 검증하고 실행해온 전략가입니다.
+                    </p>
+                    <div class="hero-scroll-hint">
+                        <span class="line"></span>
+                        <span>Scroll to explore</span>
+                    </div>
+                </div>
+                <div class="avatar-wrapper">
+                    <div class="avatar-circle">
+                        <img
+                            src="https://raw.githubusercontent.com/ceoYS/Profile_Photo/main/my%20picture2.png?v=20261003-1725"
+                            alt="선윤성 Profile Photo"
+                            class="avatar-photo"
+                            decoding="async"
+                            fetchpriority="high">
+                    </div>
+                    <span class="avatar-label">Portfolio</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">About</span>
+                <h2 class="section-title">사업의 '되는 구조'를 설계합니다</h2>
+                <div class="section-divider"></div>
+                <p class="section-desc">
+                    전략은 실행되지 않으면 의미가 없습니다.
+                    기획에서 멈추지 않고 직접 현장에서 부딪히며,
+                    숫자로 검증된 결과를 만들어왔습니다.
+                </p>
+            </div>
+            <div class="strength-grid reveal">
+                <div class="strength-card">
+                    <span class="card-num">01</span>
+                    <h3>의사소통</h3>
+                    <p>팀원이 말한 내용이 내가 이해한 내용과 같은지 항상 확인하며, 경청하고 명확하게 전달합니다</p>
+                </div>
+                <div class="strength-card">
+                    <span class="card-num">02</span>
+                    <h3>문제 발굴</h3>
+                    <p>현장 인터뷰 300회 이상의 경험으로 진짜 문제를 찾아냅니다</p>
+                </div>
+                <div class="strength-card">
+                    <span class="card-num">03</span>
+                    <h3>실행력</h3>
+                    <p>기획에서 멈추지 않고, 300회 인터뷰·1.2억 확보·특허 출원까지 직접 실행한 사람</p>
+                </div>
+                <div class="strength-card">
+                    <span class="card-num">04</span>
+                    <h3>검증 기반 의사결정</h3>
+                    <p>빠른 가설 설정, 빠른 검증, 빠른 피봇. 감이 아닌 데이터로 판단합니다</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Experience</span>
+                <h2 class="section-title">경험의 궤적</h2>
+                <div class="section-divider"></div>
+            </div>
+
+            <div class="exp-category-tabs reveal">
+                <button class="exp-tab active" data-target="exp-all">All</button>
+                <button class="exp-tab" data-target="exp-career">정규 경력</button>
+                <button class="exp-tab" data-target="exp-founder">창업 / 사업</button>
+                <button class="exp-tab" data-target="exp-intern">인턴십</button>
+                <button class="exp-tab" data-target="exp-project">프로젝트 / 활동</button>
+            </div>
+
+            <!-- ===== ALL ===== -->
+            <div class="exp-group active" id="exp-all">
+                <div class="timeline reveal">
+
+                    <!-- H그룹 전략기획 -->
+                    <div class="timeline-item current">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2025.01 — Present</span>
+                            <h3 class="timeline-role">H그룹 전략기획사업부</h3>
+                            <span class="timeline-org">H그룹</span>
+                            <p class="timeline-desc">
+                                그룹사 현장 운영에서 원가 구조와 비용 효율화를 체득한 뒤, 전략기획사업부로 이동하여 AI 도입 전략 수립, 신규 사업 기회 발굴 및 경영진 보고를 담당하고 있습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag badge-current">현재 진행</span>
+                                <span class="timeline-tag">전략기획</span>
+                                <span class="timeline-tag">AI 도입 전략</span>
+                                <span class="timeline-tag">원가 구조</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WeThru -->
+                    <div class="timeline-item current">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2025.01 — Present</span>
+                            <h3 class="timeline-role">전략 컨설팅 스타트업 CEO</h3>
+                            <span class="timeline-org">WeThru</span>
+                            <p class="timeline-desc">
+                                전략 컨설팅 스타트업 WeThru를 창업하여 사업 전략 수립, IR 자료 작성, 바이럴 마케팅 대행까지 초기 창업자를 위한 종합 솔루션을 운영하고 있습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag badge-current">현재 진행</span>
+                                <span class="timeline-tag">전략 컨설팅</span>
+                                <span class="timeline-tag">CEO</span>
+                                <span class="timeline-tag">마케팅 대행</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PwC RA -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024.09 — 2024.11</span>
+                            <h3 class="timeline-role">PricewaterhouseCoopers RA</h3>
+                            <span class="timeline-org">PwC</span>
+                            <p class="timeline-desc">
+                                삼성물산 ERP 솔루션 개편에 따른 CRM 데이터 이관 작업에 참여했습니다. 구 ERP 시스템의 데이터를 신규 시스템으로 마이그레이션하고, 데이터 현황 보고 및 신규 ERP 디버깅 작업을 수행했습니다. 버그 4건을 발견하여 보고했습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">PwC</span>
+                                <span class="timeline-tag">ERP 마이그레이션</span>
+                                <span class="timeline-tag">CRM 데이터</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- zolv 사르르 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.12 — 2024.05</span>
+                            <h3 class="timeline-role">친환경 과일 포장재 'zolv(사르르)' 공동창업</h3>
+                            <span class="timeline-org">대표 · 기여도 100%</span>
+                            <p class="timeline-desc">
+                                물에 녹아 잔류농약 제거가 가능한 과일 포장재를 직접 기획하고 사업화했습니다. 과수농가·일반소비자·농협 대상 300회 이상 현장 인터뷰로 수요를 검증하고, 3D 프린팅 시제품 제작, 특허 출원, 정부지원금 1.2억 확보, OEM·원재료 공급 확약, 전국 중앙농협 16곳 및 단위농협 321곳에 유통 영업을 진행했습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">1.2억 확보</span>
+                                <span class="timeline-tag">특허 출원</span>
+                                <span class="timeline-tag">300+ 인터뷰</span>
+                                <span class="timeline-tag">농협 337곳 영업</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 볼트앤너트 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.06 — 2023.08</span>
+                            <h3 class="timeline-role">B2B·B2G 영업 인턴 — 행사기획·총괄</h3>
+                            <span class="timeline-org">(주)볼트앤너트</span>
+                            <p class="timeline-desc">
+                                1,400여 곳에 콜드메일 및 유선 영업 후 대면 미팅을 진행했습니다. 행사 수주 후 기획·외부 의사소통·강연자 초청·성과보고서 작성까지 총괄했습니다. 한국뉴욕주립대학교 행사를 성공적으로 수주하여, 만족도 조사 5점 만점 기준 평균 4.87점을 기록했습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">1,400곳 영업</span>
+                                <span class="timeline-tag">행사 총괄</span>
+                                <span class="timeline-tag">만족도 4.87</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LittlePeople -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.06 — 2023.11</span>
+                            <h3 class="timeline-role">중소기업 인턴채용 솔루션 'LittlePeople' 프로젝트 리딩</h3>
+                            <span class="timeline-org">프로젝트 리더 · 기여도 100%</span>
+                            <p class="timeline-desc">
+                                중소기업과 대학생을 연결하는 인턴 채용 플랫폼을 기획하고 운영했습니다. 중앙대 현장실습센터와 연계해 21명 인턴 연계를 완료했습니다. 수요 검증 결과 시장성이 부족하다고 판단하여 전략적 피봇을 결정했습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">21명 연계</span>
+                                <span class="timeline-tag">플랫폼 기획</span>
+                                <span class="timeline-tag">수요 검증</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 재무학회 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.03 — 2024.02</span>
+                            <h3 class="timeline-role">재무학회 재무연구회 41기 리서치·펀드매니저</h3>
+                            <span class="timeline-org">중앙대학교 재무연구회</span>
+                            <p class="timeline-desc">
+                                저평가된 가치주를 발굴·검증하는 리서치를 수행했습니다. 거시경제 분석, 매출·비용 추정, 기업가치 추정까지 전 과정을 경험했습니다. KATCH 리서치 챌린지 대회 우수상, CAU FRI CHALLENGE 우수상을 수상했습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">재무 분석</span>
+                                <span class="timeline-tag">펀드매니저</span>
+                                <span class="timeline-tag">수상 2건</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 텐덤 연픽 PM -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.02 — 2023.04</span>
+                            <h3 class="timeline-role">소개팅앱 서비스기획 인턴 (주니어 PM)</h3>
+                            <span class="timeline-org">(주)연픽 — 텐덤</span>
+                            <p class="timeline-desc">
+                                소개팅앱 UX 개선을 주도했습니다. GA를 통한 Pain Point 발견, 이벤트 트래킹, 사용자 UI/UX 리서치를 기반으로 관상 기반 맞춤 추천 알고리즘 기본 구성을 기획했습니다. 고객 평균 DT 32%↑, 이탈률 42%↓, Conversion Rate 28%↑ 달성. 인스타그램 팔로워 600→1,200명, CAC 25원 기록.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">이탈률 42%↓</span>
+                                <span class="timeline-tag">전환율 28%↑</span>
+                                <span class="timeline-tag">CAC 25원</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 애스크미 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022.12 — 2023.02</span>
+                            <h3 class="timeline-role">전략기획 인턴</h3>
+                            <span class="timeline-org">(주)애스크미</span>
+                            <p class="timeline-desc">
+                                고객사 5개를 담당하며 사업 컨설팅, 사업계획서·IR 작성, 고객사 미팅 및 CS 관리를 수행했습니다. 시장조사 보고서 제작부터 사업 방향성 제안, 사후 CS 관리까지 전략기획 전반을 경험했습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">전략기획</span>
+                                <span class="timeline-tag">IR 작성</span>
+                                <span class="timeline-tag">고객사 5개</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SoME -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022.09 — 2023.02</span>
+                            <h3 class="timeline-role">대학연합 경영컨설팅 학회 PM</h3>
+                            <span class="timeline-org">SoME 스타트업 부문</span>
+                            <p class="timeline-desc">
+                                스타트업 협업 4개 팀을 총괄하며, 콜드메일 112개 기업 전송을 통해 협업을 성사시켰습니다. 중앙대 파머스플라워 소상공인 컨설팅을 수행하여 비수기·성수기 월별 매출 차이 100만원 이상 감소시켰습니다.
+                            </p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">컨설팅</span>
+                                <span class="timeline-tag">협업 4건 성사</span>
+                                <span class="timeline-tag">매출 차이 100만원↓</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 해커톤 -->
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.09 — 2023.12</span>
+                            <h3 class="timeline-role">스타트업 해커톤 및 공모전 다수 참가</h3>
+                            <p class="timeline-desc">
+                                다양한 해커톤과 공모전에 참가하며 사업 기획 역량을 검증하고, 15건 이상의 수상 실적을 기록했습니다.
+                            </p>
+                            <div class="timeline-tags"><span class="timeline-tag">공모전 15+ 수상</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ===== 정규 경력 ===== -->
+            <div class="exp-group" id="exp-career">
+                <p class="exp-group-title">정규 경력</p>
+                <div class="timeline reveal">
+                    <div class="timeline-item current">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2025.01 — Present</span>
+                            <h3 class="timeline-role">H그룹 전략기획사업부</h3>
+                            <span class="timeline-org">정규 경력</span>
+                            <p class="timeline-desc">그룹사 현장 운영에서 원가 구조와 비용 효율화를 체득한 뒤, 전략기획사업부로 이동하여 AI 도입 전략 수립, 신규 사업 기회 발굴 및 경영진 보고를 담당하고 있습니다.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag badge-current">현재 진행</span>
+                                <span class="timeline-tag">전략기획</span>
+                                <span class="timeline-tag">AI 도입 전략</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024.09 — 2024.11</span>
+                            <h3 class="timeline-role">PricewaterhouseCoopers RA</h3>
+                            <span class="timeline-org">PwC</span>
+                            <p class="timeline-desc">삼성물산 ERP 솔루션 개편에 따른 CRM 데이터 이관 작업에 참여. 구 ERP → 신규 시스템 마이그레이션, 데이터 현황 보고, 신규 ERP 디버깅. 버그 4건 발견.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">PwC</span>
+                                <span class="timeline-tag">ERP 마이그레이션</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 창업 / 사업 ===== -->
+            <div class="exp-group" id="exp-founder">
+                <p class="exp-group-title">창업 / 사업</p>
+                <div class="timeline reveal">
+                    <div class="timeline-item current">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2025.01 — Present</span>
+                            <h3 class="timeline-role">전략 컨설팅 스타트업 CEO</h3>
+                            <span class="timeline-org">WeThru</span>
+                            <p class="timeline-desc">전략 컨설팅 스타트업 WeThru를 창업하여 사업 전략 수립, IR 자료 작성, 바이럴 마케팅 대행까지 초기 창업자를 위한 종합 솔루션을 운영하고 있습니다.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag badge-current">현재 진행</span>
+                                <span class="timeline-tag">전략 컨설팅</span>
+                                <span class="timeline-tag">마케팅 대행</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.12 — 2024.05</span>
+                            <h3 class="timeline-role">친환경 과일 포장재 'zolv(사르르)' 공동창업</h3>
+                            <span class="timeline-org">대표 · 기여도 100%</span>
+                            <p class="timeline-desc">물에 녹아 잔류농약 제거가 가능한 과일 포장재를 기획·사업화. 300+ 인터뷰, 1.2억 정부지원금 확보, 특허 출원, OEM·원재료 공급 확약, 농협 337곳 유통 영업.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">1.2억 확보</span>
+                                <span class="timeline-tag">특허 출원</span>
+                                <span class="timeline-tag">농협 337곳</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 인턴십 ===== -->
+            <div class="exp-group" id="exp-intern">
+                <p class="exp-group-title">인턴십</p>
+                <div class="timeline reveal">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.06 — 2023.08</span>
+                            <h3 class="timeline-role">B2B·B2G 영업 인턴 — 행사기획·총괄</h3>
+                            <span class="timeline-org">(주)볼트앤너트</span>
+                            <p class="timeline-desc">1,400여 곳 영업. 한국뉴욕주립대 행사 수주·총괄. 만족도 4.87/5.0점.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">1,400곳 영업</span>
+                                <span class="timeline-tag">만족도 4.87</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.02 — 2023.04</span>
+                            <h3 class="timeline-role">소개팅앱 서비스기획 인턴 (주니어 PM)</h3>
+                            <span class="timeline-org">(주)연픽 — 텐덤</span>
+                            <p class="timeline-desc">소개팅앱 UX 개선 주도. 이탈률 42%↓, 전환율 28%↑, DT 32%↑. 팔로워 600→1,200명, CAC 25원.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">이탈률 42%↓</span>
+                                <span class="timeline-tag">CAC 25원</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022.12 — 2023.02</span>
+                            <h3 class="timeline-role">전략기획 인턴</h3>
+                            <span class="timeline-org">(주)애스크미</span>
+                            <p class="timeline-desc">고객사 5개 담당. 사업 컨설팅, 사업계획서·IR 작성, 고객사 미팅 및 CS 관리.</p>
+                            <div class="timeline-tags">
+                                <span class="timeline-tag">전략기획</span>
+                                <span class="timeline-tag">IR 작성</span>
+                                <span class="timeline-tag">고객사 5개</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== 프로젝트 / 활동 ===== -->
+            <div class="exp-group" id="exp-project">
+                <p class="exp-group-title">프로젝트 / 활동</p>
+                <div class="timeline reveal">
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.06 — 2023.11</span>
+                            <h3 class="timeline-role">중소기업 인턴채용 솔루션 'LittlePeople' 프로젝트 리딩</h3>
+                            <p class="timeline-desc">중소기업-대학생 연결 플랫폼. 21명 인턴 연계 완료, 시장성 검증 후 전략적 피봇 결정.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">21명 연계</span><span class="timeline-tag">수요 검증</span></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.03 — 2024.02</span>
+                            <h3 class="timeline-role">재무학회 재무연구회 41기 리서치·펀드매니저</h3>
+                            <p class="timeline-desc">저평가 가치주 발굴·검증. 거시경제 분석 ~ 기업가치 추정. 리서치 챌린지 수상 2건.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">재무 분석</span><span class="timeline-tag">펀드매니저</span></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2022.09 — 2023.02</span>
+                            <h3 class="timeline-role">대학연합 경영컨설팅 학회 PM</h3>
+                            <span class="timeline-org">SoME 스타트업 부문</span>
+                            <p class="timeline-desc">스타트업 협업 4건 성사. 콜드메일 112개 기업 전송. 소상공인 컨설팅으로 매출 차이 100만원 이상 감소.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">컨설팅</span><span class="timeline-tag">협업 4건</span></div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023.09 — 2023.12</span>
+                            <h3 class="timeline-role">스타트업 해커톤 및 공모전 다수 참가</h3>
+                            <p class="timeline-desc">다양한 해커톤과 공모전에 참가하며 사업 기획 역량을 검증했습니다.</p>
+                            <div class="timeline-tags"><span class="timeline-tag">공모전 15+ 수상</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT ===== -->
+    <section class="product" id="product">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Product</span>
+                <h2 class="section-title">직접 만들고 운영한 프로덕트</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="product-grid reveal">
+                <div class="product-card">
+                    <div class="product-icon">🎙️</div>
+                    <h3>in u in — 정성적 인터뷰 매칭·솔루션 플랫폼</h3>
+                    <p>고객 인터뷰를 해줄 사람을 찾기 어렵다는 Pain Point에서 출발했습니다. 개발자 11명과 협업하며 서비스 기획자 겸 퍼블리셔로서 프로토타입을 개발했고, VoC 검증을 완료한 플랫폼으로 한 달 이상 지속적인 매출을 창출했습니다.</p>
+                    <div class="product-stat">
+                        <span>개발자 11명 협업</span>
+                        <span>Figma·React·JS</span>
+                        <span>VoC 검증 완료</span>
+                        <span>지속 매출 창출</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🏋️</div>
+                    <h3>GymPT — AI 웨이트트레이닝 자세 진단 솔루션</h3>
+                    <p>웨이트트레이닝 시 자세 불균형·부상 위험이라는 Pain Point를 DT로 해결하는 솔루션을 기획했습니다. LLM 기반 RAG 시스템을 설계하고, 82명 사용 인터뷰를 진행했습니다. 모교 기숙사·헬스 동아리·상도 헬스장과 서비스 계약을 체결했습니다.</p>
+                    <div class="product-stat">
+                        <span>LLM/RAG 설계</span>
+                        <span>82명 사용 인터뷰</span>
+                        <span>서비스 계약 체결</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BUSINESS ===== -->
+    <section class="business" id="business">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Business</span>
+                <h2 class="section-title">전달 구조로 정리한 사업의 기록</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="business-hero reveal">
+                <span class="biz-label">Founder · 기여도 100%</span>
+                <h3>zolv(사르르) — 물에 녹아 잔류농약 제거가 가능한 과일 포장재</h3>
+                <p>전 세계 일회용 포장재를 물에 녹는 포장재로 대체하겠다는 비전에서 출발했습니다. 과수농가·일반소비자·GAP 주무관 대상 300회 이상 심층 인터뷰로 수요를 검증하고, 시제품 제작, 특허 출원, 정부지원금 1.2억 확보, OEM·원재료 공급 확약, 전국 농협 337곳 유통 영업까지 직접 수행했습니다.</p>
+                <div class="biz-stats">
+                    <div class="biz-stat-item">
+                        <span class="stat-number">1.2억</span>
+                        <span class="stat-label">정부지원금 확보</span>
+                    </div>
+                    <div class="biz-stat-item">
+                        <span class="stat-number">300+</span>
+                        <span class="stat-label">현장 인터뷰</span>
+                    </div>
+                    <div class="biz-stat-item">
+                        <span class="stat-number">337</span>
+                        <span class="stat-label">농협 영업 (중앙 16 + 단위 321)</span>
+                    </div>
+                </div>
+                <div class="biz-details">
+                    <span class="biz-detail-tag">3D 프린팅 시제품 제작</span>
+                    <span class="biz-detail-tag">특허 출원 완료</span>
+                    <span class="biz-detail-tag">(주)대상 원재료 공급 확약</span>
+                    <span class="biz-detail-tag">(주)네이쳐스웨이 OEM 확약</span>
+                    <span class="biz-detail-tag">농협아그로 유통 확약</span>
+                    <span class="biz-detail-tag">중앙대 창업기업 선정 · 1,600만원</span>
+                    <span class="biz-detail-tag">GAP 주무관 32명 인터뷰</span>
+                    <span class="biz-detail-tag">환경산업기술원 제품 환경성 시험 상담</span>
+                </div>
+            </div>
+            <div class="business-sub reveal">
+                <h4>LittlePeople — 중소기업 인턴채용 솔루션</h4>
+                <p>중소기업과 대학생을 연결하는 인턴 채용 플랫폼을 기획하고 운영했습니다. 21명 인턴 연계를 완료했으나 시장성 검증 결과 피봇을 결정. 실행보다 빠른 검증이 더 가치 있다는 것을 현장에서 증명한 경험입니다.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== AWARDS ===== -->
+    <section class="awards" id="awards">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Awards</span>
+                <h2 class="section-title">수상 이력</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="awards-summary reveal">
+                <div class="award-count"><span class="num">17</span><span class="label">Total</span></div>
+                <div class="award-count"><span class="num">5</span><span class="label">대상</span></div>
+                <div class="award-count"><span class="num">5</span><span class="label">우수</span></div>
+                <div class="award-count"><span class="num">3</span><span class="label">은상·장려</span></div>
+            </div>
+            <div class="awards-list reveal">
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>실감미디어 경진대회</h4><p>2024.12</p></div>
+                    <span class="award-rank">수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>HULT PRIZE in Boston</h4><p>2024.06</p></div>
+                    <span class="award-rank">Final Top 6</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>PTIT 베트남대 × CAU 연합 해커톤</h4><p>2024.05</p></div>
+                    <span class="award-rank">대상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>UMC 아이디어 해커톤</h4><p>2024.05</p></div>
+                    <span class="award-rank">우수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>학생 소셜벤처 창업 경진대회</h4><p>2024.02</p></div>
+                    <span class="award-rank">대상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>Hult Prize Local Summit</h4><p>2024.01</p></div>
+                    <span class="award-rank">대상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>G-Star 고성장 글로벌 시장진출 기획 창업가 육성</h4><p>2024.02</p></div>
+                    <span class="award-rank">장려상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>KATCH 리서치 챌린지 대회</h4><p>2024.01</p></div>
+                    <span class="award-rank">우수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>CAU FRI CHALLENGE</h4><p>2023.12</p></div>
+                    <span class="award-rank">우수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>VCC 캠프 국제 해커톤</h4><p>2023.12</p></div>
+                    <span class="award-rank">장려상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>공공기술 사업화 아이디어톤</h4><p>2023.12</p></div>
+                    <span class="award-rank">대상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>글로컬 이노베이터 특허 경진대회</h4><p>2023.11</p></div>
+                    <span class="award-rank">대상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>썸썸 BLUE IN 경남</h4><p>2023.10</p></div>
+                    <span class="award-rank">장려상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>동작! 창업 경진대회</h4><p>2023.09</p></div>
+                    <span class="award-rank">장려상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>메이커 해커톤</h4><p>2023.09</p></div>
+                    <span class="award-rank">우수상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>경영경제대학 창업 경진대회</h4><p>2023.09</p></div>
+                    <span class="award-rank">장려상</span>
+                </div>
+                <div class="award-item">
+                    <div class="award-icon">🏆</div>
+                    <div class="award-text"><h4>ICC 코어톤</h4><p>2023.08</p></div>
+                    <span class="award-rank">우수상</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="education" id="education">
+        <div class="container">
+            <div class="reveal">
+                <span class="section-label">Education & Skills</span>
+                <h2 class="section-title">기반 역량</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="edu-grid reveal">
+                <div class="edu-block">
+                    <h3>Education</h3>
+                    <h4>중앙대학교 경영학과</h4>
+                    <p></p>
+                    <div style="margin-top: 32px;">
+                        <h3>Tools</h3>
+                        <div class="tools-wrap">
+                            <span class="tool-tag">GA4</span>
+                            <span class="tool-tag">SQL</span>
+                            <span class="tool-tag">Figma</span>
+                            <span class="tool-tag">React 기초</span>
+                            <span class="tool-tag">JavaScript</span>
+                            <span class="tool-tag">Python 기초</span>
+                            <span class="tool-tag">Excel</span>
+                            <span class="tool-tag">PowerPoint</span>
+                            <span class="tool-tag">Slack</span>
+                            <span class="tool-tag">Jandi</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="edu-block">
+                    <h3>Continuous Learning</h3>
+                    <div class="learning-item"><span class="learning-dot"></span><span>스타트업 전략 컨설팅 실무 (WeThru 자체 프로젝트 기반)</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>머신러닝 및 LLM 활용 독학 (Udemy)</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>GA4 및 SQL 기반 데이터 분석 독학</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>insightBay 전략재무·전략엑셀 강의 완강</span></div>
+                    <div class="learning-item"><span class="learning-dot"></span><span>사업계획서 작성 및 IR 피칭 실전 경험</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">WETHRU</div>
+            <p class="footer-tagline">Crafted by WeThru</p>
+            <p class="footer-copy">© 2026 WeThru. All rights reserved. This is a portfolio demo.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky Header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // Scroll Reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => revealObserver.observe(el));
+
+        // Experience Tab Switching
+        const expTabs = document.querySelectorAll('.exp-tab');
+        const expGroups = document.querySelectorAll('.exp-group');
+
+        expTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                expTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const targetId = tab.getAttribute('data-target');
+                expGroups.forEach(group => {
+                    group.classList.remove('active');
+                    if (group.id === targetId) {
+                        group.classList.add('active');
+                        group.querySelectorAll('.reveal').forEach(el => {
+                            revealObserver.observe(el);
+                        });
+                    }
+                });
+            });
+        });
+
+        // Active Nav Link
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 200) current = section.getAttribute('id');
+            });
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href') === '#' + current) link.style.color = 'var(--gold)';
+            });
+        });
+    </script>
+</body>
+</html>
