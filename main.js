@@ -215,9 +215,18 @@
 
     if (!tabs.length) return;
 
+    function ensureSlideLoaded(idx) {
+      var iframe = slides[idx] ? slides[idx].querySelector('iframe[data-src]') : null;
+      if (!iframe) return;
+      iframe.setAttribute('src', iframe.getAttribute('data-src'));
+      iframe.removeAttribute('data-src');
+    }
+
     function activateTab(tab) {
       var idx = parseInt(tab.getAttribute('data-tab'), 10);
       if (Number.isNaN(idx) || !slides[idx]) return;
+
+      ensureSlideLoaded(idx);
 
       tabs.forEach(function (t) {
         t.classList.remove('is-active');
